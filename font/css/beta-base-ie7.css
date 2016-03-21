@@ -1,0 +1,21 @@
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'beta-base';
+  font-style: normal;
+  font-weight: normal;
+ 
+  /* fix buttons height */
+  line-height: 1em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+}
+ 
+.icon-i { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#x21;&nbsp;'); }
+.icon-cancel { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#x22;&nbsp;'); }
+.icon-menu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#x23;&nbsp;'); }
+.icon-star-empty { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#x25;&nbsp;'); }
+.icon-star { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#x26;&nbsp;'); }
+.icon-f { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#x27;&nbsp;'); }
+.icon-g { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#x28;&nbsp;'); }
+.icon-t { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#x29;&nbsp;'); }
+.icon-upload { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#x77;&nbsp;'); }
