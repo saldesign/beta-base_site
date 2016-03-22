@@ -2,18 +2,20 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0">
+
 	<title>Home - Beta-Base</title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link href="font/css/beta-base.css" rel="stylesheet" type="text/css" />
 	<link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,500italic,400italic,700,500|Open+Sans:400,600,700,400italic,600italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-<body>
+<body class="cf">
 
 	<header class="cf">
 		<h1><a href="#"><span>Beta-Base - Rock Climbing Guide</span></a></h1>
 		 <a href="#menu" class="menu-link icon-menu"></a>
-			<nav class="main-nav" role="navigation">
+			<nav class="main-nav cf" role="navigation">
 				<ul>
 					<li><a href="#">Sign In/Up</a></li>
 					<li><a href="#">About</a></li>
@@ -31,24 +33,34 @@
 			<h2><span>Where climbers come</span><span> to <a href="#">share</a> and <a href="#">find</a></span><span> rock climbing beta<span></h2>
 		</section>
 
-		<div class="quicklinks">
-			<section class="module">
-				<h3><span>Share</span></h3>
-				<p>Share developed climbing routes along with descriptions, gradings, ratings, coordinates and images</p>
-				<a href="#" class="btn">Get Started</a>
-			</section>
-			<section class="module">
-				<h3><span>Find</span></h3>
-				<p>Find climbing route information, images, ratings, gradings, and coordinates to get there</p>
-				<a href="#" class="btn">Get Started</a>
-			</section>
-			<section class="module">
-				<h3><span>Join</span></h3>
-				<p>Become a member to keep a tick list of all the climbs you have done or want to do</p>
-				<a href="#" class="btn">Get Started</a>
-			</section>
-		</div>
+		<div class="quicklinks cf">
+			<div class="container">
+				<section class="module">
+						<h3><span>Share</span></h3>
+						<p>Share developed climbing routes along with descriptions, gradings, ratings, coordinates and images</p>
+						<a href="#" class="btn">Get Started</a>
+				</section>
+			</div>
 
+			<div class="container">
+				<section class="module">
+						<h3><span>Find</span></h3>
+						<p>Find climbing route information, images, ratings, gradings, and coordinates to get there</p>
+						<a href="#" class="btn">Get Started</a>
+				</section>
+			</div>
+
+			<div class="container">
+				<section class="module">
+						<h3><span>Join</span></h3>
+						<p>Become a member to keep a tick list of all the climbs you have done or want to do</p>
+						<a href="#" class="btn">Get Started</a>
+				</section>
+			</div>
+		</div>
+	</main>
+
+	<aside>
 		<section class="module secondary">
 			<h4>Recent Shares</h4>
 			<article class="cf">
@@ -92,7 +104,7 @@
 				<p>AUTHOR<span>TICKS</span></p>
 			</article>
 		</section>
-	</main>
+	</aside>
 
 	<footer>
 		<div class="cf">
