@@ -92,16 +92,18 @@
 				<p>AUTHOR<span>TICKS</span></p>
 			</article>
 		</section>
-	<main>
+	</main>
 
 	<footer>
-		<h2><a href="#">Beta-Base Rock Climbing Guide</a></h2>
-		<a href="#" class="btn">SIGN IN or SIGN UP</a>
+		<div class="cf">
+			<h2><a href="#"><span>Beta-Base Rock Climbing Guide</span></a></h2>
+			<span class="btncontainer"><a href="#" class="btn">SIGN IN or SIGN UP</a></span>
+		</div>
 		<h4>CONTACT US</h4>
-		<a href="mailto:someone@example.com?Subject=Hello%20again" target="_top" class="icon-mail">Send Mail</a>
+		<a href="mailto:someone@example.com?Subject=Hello%20again" target="_top" class="icon-mail">beta-base@beta-base.com</a>
 		<h4>SITEMAP</h4>
 		<nav class="foot-nav">
-			<ul>
+			<ul class="cf">
 				<li><a href="#">HOME</a></li>
 				<li><a href="#">ABOUT</a></li>
 				<li><a href="#">SHARE</a></li>
@@ -109,11 +111,11 @@
 			</ul>
 		</nav>
 		<nav class="social-nav">
-			<ul>
-				<li><a href="#"class="icon-social-f"></a></li>
-				<li><a href="#"class="icon-social-i"></a></li>
-				<li><a href="#"class="icon-social-g"></a></li>
-				<li><a href="#"class="icon-social-t"></a></li>
+			<ul class="cf">
+				<li><a href="#"class="icon-f"></a></li>
+				<li><a href="#"class="icon-i"></a></li>
+				<li><a href="#"class="icon-g"></a></li>
+				<li><a href="#"class="icon-t"></a></li>
 			</ul>
 		</nav>
 		<a href="#">Terms and Conditions</a>
@@ -122,6 +124,13 @@
 	<script src="css/script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 
