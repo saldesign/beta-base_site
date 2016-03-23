@@ -28,100 +28,65 @@
 	</header>
 
 	<main>
-
 		<section class="module banner">
 			<h2><span>Where climbers come</span><span> to <a href="#">share</a> and <a href="#">find</a></span><span> rock climbing beta<span></h2>
 		</section>
 
 		<div class="quicklinks cf">
-			<div class="container">
-				<section class="module">
+			<div class="container cf">
+				<div class="wrapper">
+					<section class="module">
 						<h3><span>Share</span></h3>
-						<p>Share developed climbing routes along with descriptions, gradings, ratings, coordinates and images</p>
+						<p class="icon-share cf">Share developed climbing routes along with descriptions, gradings, ratings, coordinates and images</p>
 						<a href="#" class="btn">Get Started</a>
-				</section>
-			</div>
-
-			<div class="container">
-				<section class="module">
+					</section>
+				</div>
+				<div class="wrapper">
+					<section class="module">
 						<h3><span>Find</span></h3>
-						<p>Find climbing route information, images, ratings, gradings, and coordinates to get there</p>
+						<p class="icon-find cf">Find climbing route information, images, ratings, gradings, and coordinates to get there</p>
 						<a href="#" class="btn">Get Started</a>
-				</section>
+					</section>
+				</div>
 			</div>
 
 			<div class="container">
 				<section class="module">
 						<h3><span>Join</span></h3>
-						<p>Become a member to keep a tick list of all the climbs you have done or want to do</p>
-						<a href="#" class="btn">Get Started</a>
+						<div>
+							<p class="icon-join cf">Become a member to keep a tick list of all the climbs you have done or want to do</p>
+							<a href="#" class="btn">Get Started</a>
+						</div>
 				</section>
 			</div>
 		</div>
 	</main>
 
-	<aside>
-		<section class="module secondary">
-			<h4>Recent Shares</h4>
-			<article class="cf">
-				<h5>CLIMB NAME<span>GRADE</span></h5>
-				<h6>AREA<span class="ratings"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></span></h6>
-				<p>AUTHOR<span>DATE</span></p>
-				<p>A clean, short, 3 move, hand crack on the left most behive boulder</p>
-				<a href="#" class="btn">Read More...</a>
-			</article>
-			<article class="cf">
-				<h5>CLIMB NAME<span>GRADE</span></h5>
-				<h6>AREA<span class="ratings"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></span></h6>
-				<p>AUTHOR<span>DATE</span></p>
-				<p>A clean, short, 3 move, hand crack on the left most behive boulder</p>
-				<a href="#" class="btn">Read More...</a>
-			</article>
-			<article class="cf">
-				<h5>CLIMB NAME<span>GRADE</span></h5>
-				<h6>AREA<span class="ratings"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></span></h6>
-				<p>AUTHOR<span>DATE</span></p>
-				<p>A clean, short, 3 move, hand crack on the left most behive boulder</p>
-				<a href="#" class="btn">Read More...</a>
-			</article>
-		</section>
-
-		<section class="module secondary">
-			<h4>Recent Climbs</h4>
-			<article>
-				<h5>CLIMB NAME<span>GRADE</span></h5>
-				<h6>AREA<span class="rating">RATING</span></h6>
-				<p>AUTHOR<span>TICKS</span></p>
-			</article>
-			<article>
-				<h5>CLIMB NAME<span>GRADE</span></h5>
-				<h6>AREA<span class="rating">RATING</span></h6>
-				<p>AUTHOR<span>TICKS</span></p>
-			</article>
-			<article>
-				<h5>CLIMB NAME<span>GRADE</span></h5>
-				<h6>AREA<span class="rating">RATING</span></h6>
-				<p>AUTHOR<span>TICKS</span></p>
-			</article>
-		</section>
-	</aside>
+<?php include('aside.php'); ?>
 
 	<footer>
-		<div class="cf">
+		<div class="logo cf">
 			<h2><a href="#"><span>Beta-Base Rock Climbing Guide</span></a></h2>
 			<span class="btncontainer"><a href="#" class="btn">SIGN IN or SIGN UP</a></span>
 		</div>
-		<h4>CONTACT US</h4>
-		<a href="mailto:someone@example.com?Subject=Hello%20again" target="_top" class="icon-mail">beta-base@beta-base.com</a>
-		<h4>SITEMAP</h4>
-		<nav class="foot-nav">
-			<ul class="cf">
-				<li><a href="#">HOME</a></li>
-				<li><a href="#">ABOUT</a></li>
-				<li><a href="#">SHARE</a></li>
-				<li><a href="#">FIND</a></li>
-			</ul>
-		</nav>
+		<div class="contact">
+			<h4>CONTACT US</h4>
+			<a href="mailto:someone@example.com?Subject=Hello%20again" target="_top" class="icon-mail">beta-base@beta-base.com</a>
+		</div>
+<!-- 		<label class="newsletter">JOIN THE NEWSLETTER:
+			<input type="email" name="email">Email</input><button>Sign Up</button>
+		</label> -->
+		<div>
+			<h4>SITEMAP</h4>
+			<nav class="foot-nav">
+				<ul class="cf">
+					<li><a href="#">HOME</a></li>
+					<li><a href="#">ABOUT</a></li>
+					<li><a href="#">SHARE</a></li>
+					<li><a href="#">FIND</a></li>
+				</ul>
+			</nav>
+		</div>
 		<nav class="social-nav">
 			<ul class="cf">
 				<li><a href="#"class="icon-f"></a></li>
@@ -130,7 +95,7 @@
 				<li><a href="#"class="icon-t"></a></li>
 			</ul>
 		</nav>
-		<a href="#">Terms and Conditions</a>
+		<a href="#" class="terms">Terms and Conditions</a>
 	</footer>
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="css/script.js"></script>

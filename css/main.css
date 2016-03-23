@@ -36,11 +36,14 @@ a{
 	-moz-transition: all .25s linear;
 	-o-transition: all .25s linear;
 }
+a:hover{
+	color:#ffd666;
+}
 h2,
 h3,
 h4,
 h5,
-h6 {
+h6a {
 	font-family: 'Fira Sans', sans-serif;
 	font-weight: 700;
 	font-size: 1.5rem;
@@ -52,7 +55,9 @@ h3,
 h4{
 	margin-bottom: 1rem;
 }
-
+p{
+	font-size: 0.875rem;
+}
 /*********   	Header	   *********/
 header{
 	background-color: #093c4f;
@@ -115,6 +120,11 @@ header a.menu-link {
 			position: relative;
 			color: #FFF;
 		}
+		header nav.main-nav ul li:first-child a:focus,
+		header nav.main-nav ul li:first-child a:active,
+		header nav.main-nav ul li:first-child a:hover{
+			color: #ffd666
+		}
 		header nav.main-nav ul li:first-child a:before{
 			content: "";
 			position: absolute;
@@ -141,13 +151,6 @@ header a.menu-link {
 main{
 	padding: 0 .25rem;
 }
-	main a{
-		color: #02d0f5;
-		border-bottom: 2px solid #02d0f5;
-	}
-	main p{
-		font-size: 0.875rem;
-	}
 	.module{
 		background-color: #ffffff;
 		margin-bottom: 1rem;
@@ -157,6 +160,17 @@ main{
 
 		/*********   	Main - module - banner	   *********/
 
+		main .module.banner{
+			min-height: 9rem;
+		}
+		main .module.banner a{
+			color: #02d0f5;
+			border-bottom: 2px solid #02d0f5;
+		}
+		main .module.banner a:hover{
+			color: #ffd666;
+			border-bottom: #ffd666 solid 2px;
+		}
 		main .module.banner h2{
 			max-width: 24rem;
 			line-height: 2rem;
@@ -177,12 +191,11 @@ main{
 		/*********   	Main - module - quicklinks	   *********/
 
 		.quicklinks .module{
-			margin-bottom: 0;
+			margin-bottom: .5rem;
 		}
-			.quicklinks .module:last-child{
-				margin-bottom: .5rem;
-				clear: both;
-			}
+		.quicklinks .container:last-child section{
+			margin-bottom: 1rem;
+		}
 			.quicklinks .module h3{
 				position: relative;
 				text-align: center;
@@ -203,6 +216,18 @@ main{
 				.quicklinks .module h3 span{
 					background-color: #FFFFFF;
 					padding:0 1rem;
+				}
+				.quicklinks .module h3 + div{
+					max-width: 30rem;
+					margin: 0 auto;
+				}
+				.quicklinks .module p:before{
+					display: block;
+					font-size: 9rem;
+					margin:0 auto 1rem;
+				}
+				.quicklinks .module a.btn{
+				
 				}
 
 	/*********  	 Aside - module - secondary	   *********/
@@ -245,6 +270,7 @@ main{
 		.module.secondary article p:first-of-type{
 			border-top:1px solid #DBDAD5;
 			margin-bottom: .5rem;
+			font-size: 1rem;
 		}
 			.module.secondary article p:first-of-type span{
 				float: right;
@@ -325,6 +351,7 @@ footer nav.social-nav {
 	background-color: #093c4f;
 	padding:.5rem 0;
 	margin-bottom: 1rem;
+	clear: both;
 }
 	footer nav.social-nav ul li{
 		display: block;
@@ -334,7 +361,7 @@ footer nav.social-nav {
 		text-align: center;
 	}
 
-footer a:nth-child(7){
+footer a.terms{
 	background-color: #093c4f;
 	text-align: center;
 	display: block;
@@ -350,6 +377,7 @@ footer a:nth-child(7){
 	header h1{
 		min-width: 13rem;
 		width: 30%;
+		padding-left: 1rem;
 	}
 	a.menu-link{
 		display: none;
@@ -390,32 +418,357 @@ footer a:nth-child(7){
 		}
 	main{
 		float: left;
-		width: 66.66%;
+		width: 62%;
 		padding: 0 0 0 1rem;
 	}
-	main .quicklinks div.container:first-child,
-	main .quicklinks div.container:nth-child(2){
+		main .module.banner {
+		    min-height: 15rem;
+		}
+		main .module.banner h2 {
+			margin: 7rem 1.5rem 0;
+		}
+		main .quicklinks .container .wrapper section{
+			min-height: 22rem;
+		}
+		main .quicklinks .wrapper:first-child{
+			float: left;
+			width: 50%;
+			padding-right: .5rem;
+		}
+		main .quicklinks .wrapper:last-child{
+			float: right;
+			width: 50%;
+			padding-left: .5rem;
+			margin-bottom: .5rem;
+		}
+	aside{
+		width: 38%;
+		float: right;
+		padding: .5rem 1rem;
+	}
+	footer div:nth-child(2){
 		float: left;
 		width: 50%;
 	}
-	main .quicklinks div.container:first-child{
-		padding-right: .25rem;
-	}
-	main .quicklinks div.container:nth-child(2){
-			padding-left: .25rem;
-	}
-
-
-
-
-
-
-	aside{
-		width: 33.33%;
+	footer div:nth-child(3){
 		float: right;
-		padding: 1rem;
+		width: 50%;
 	}
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
