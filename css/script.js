@@ -3,14 +3,11 @@
 $(document).ready(function() {
   $('body').addClass('js');
   var $menulink = $('.menu-link'),
-  $mainnav = $('.main-nav'),
-  $searchlink = $('.search-link'),
-  $searchinput = $('.searchinput');
+  $mainnav = $('.main-nav');
   
 
   $menulink.click(function() {
    $(this).toggleClass('active');
-   $searchinput.toggleClass('active');
    $mainnav.toggleClass('active');
    if($(this).hasClass('active')){
     	$(this).removeClass('icon-menu').addClass('icon-cancel')
@@ -20,12 +17,7 @@ $(document).ready(function() {
 	  return false;
 	});//End menulink.click
 
-  $searchlink.click(function(){
-  	$(this).toggleClass('active');
-  	$searchinput.toggleClass('active');
-  	return false;
-  });
-
+/*
   // Show or hide the sticky back to top button
   $(window).scroll(function() {
       if ($(this).scrollTop() > 200) {
@@ -55,7 +47,7 @@ $(document).ready(function() {
           }, 900, 'swing');
       });
 
-
+*/
 
 
 

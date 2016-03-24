@@ -43,7 +43,7 @@ h2,
 h3,
 h4,
 h5,
-h6a {
+h6 {
 	font-family: 'Fira Sans', sans-serif;
 	font-weight: 700;
 	font-size: 1.5rem;
@@ -172,8 +172,8 @@ main{
 			border-bottom: #ffd666 solid 2px;
 		}
 		main .module.banner h2{
-			max-width: 24rem;
-			line-height: 2rem;
+			max-width:36rem;
+			line-height: 2.5rem;
 			font-size: 1.25rem;
 			margin: 3rem 0 0;
 		}
@@ -226,9 +226,7 @@ main{
 					font-size: 9rem;
 					margin:0 auto 1rem;
 				}
-				.quicklinks .module a.btn{
-				
-				}
+
 
 	/*********  	 Aside - module - secondary	   *********/
 
@@ -280,6 +278,10 @@ main{
 			margin: .5rem 0 1.5rem;
 			}	
 
+
+/*********   	Form Styles	   *********/
+
+
 /*********   	Footer	   *********/
 
 footer{
@@ -291,19 +293,24 @@ footer{
 footer a{
 	color: #a3f1ff;
 }
-footer h2 {
+footer h4{
+	color: white;
+	margin-bottom: 0rem;
+	padding:0 1rem;
+}
+footer div.logo h2 {
 	height: 100%;
 	width: 30%;
 	float: left;
 	padding:0 1rem;
 }
-	footer h2 a{
+	footer div.logo h2 a{
 		width: 100%;
 		height:100%;
 		text-decoration: none;	
 		text-indent: -30000%;	/*a tag neg text indent is opposite to renspec*/
 	}
-	footer h2 span{
+	footer div.logo h2 span{
 		background: url("../images/logo-icon.png") no-repeat 0.5rem center;
 		background-size: 3.5rem 3.5rem;
 		background-color: #ffd666;
@@ -311,46 +318,39 @@ footer h2 {
 		display: block;
 		width: 4.5rem;    
 	}
-footer span.btncontainer{
-	width: 70%;
-}
-
-	footer a.btn{
-		background-color: #ffd666;
-		color: #093c4f;
-		margin: 1rem auto 0;
-		padding:.125rem 1.75rem;
+	footer div.logo span.btncontainer{
+		width: 70%;
 	}
-	footer a.btn:hover,
-	footer a.btn:focus{
-		border: solid 1px #02d0f5;
-		color: #fff;
-		background-color: #093c4f;
-	}
-footer h4{
-	color: white;
-	margin-bottom: 0rem;
-	padding:0 1rem;
-}
-footer a.icon-mail:before{
+		footer div.logo a.btn{
+			background-color: #ffd666;
+			color: #093c4f;
+			margin: 1rem auto 0;
+			padding:.125rem 1.75rem;
+		}
+		footer div.logo a.btn:hover,
+		footer div.logo a.btn:focus{
+			border: solid 1px #02d0f5;
+			color: #fff;
+			background-color: #093c4f;
+		}
+footer div.contact a.icon-mail:before{
 	font-size: 1.25rem;
 	margin:0 .75rem 1.5rem;
 	padding:0 .875rem;
-
 }
-footer nav.foot-nav ul{
+footer div.sitemap nav ul{
 	padding:0 1.5rem;
 	margin-bottom: 1rem;
 }
-	footer nav.foot-nav ul li{
+	footer div.sitemap nav ul li{
 		float: left;
 		line-height: 1.75rem;
 		width: 50%;
 	}
-footer nav.social-nav {
+footer nav.social-nav ul {
 	background-color: #093c4f;
 	padding:.5rem 0;
-	margin-bottom: 1rem;
+	margin: .5rem 0 1rem;
 	clear: both;
 }
 	footer nav.social-nav ul li{
@@ -360,11 +360,11 @@ footer nav.social-nav {
 		font-size: 2rem;
 		text-align: center;
 	}
-
 footer a.terms{
 	background-color: #093c4f;
 	text-align: center;
 	display: block;
+	clear: both;
 	line-height: 2rem;
 }
 
@@ -446,15 +446,22 @@ footer a.terms{
 		float: right;
 		padding: .5rem 1rem;
 	}
-	footer div:nth-child(2){
+	footer div.contact{
 		float: left;
-		width: 50%;
+		width: 38%;
+		max-width: 26rem;
 	}
-	footer div:nth-child(3){
+	footer div.sitemap{
+		float: left;
+		width: 32%;
+	}
+	footer nav.social-nav{
+		width: 30%;
 		float: right;
-		width: 50%;
 	}
-
+		footer nav.social-nav ul{
+			background-color: #143440;
+		}
 
 }
 
