@@ -1,4 +1,4 @@
-<?php $thisPage="find"; ?>
+<?php $thisPage="about"; ?>
 
 
 <?php include('header.php'); ?>
@@ -12,23 +12,14 @@
 		<div class="quicklinks cf">
 			<div class="container">
 				<section class="module">
-						<h3><span>Find</span></h3>
+						<h3><span>About</span></h3>
 						<div>
 							<p class="icon-join cf">Follow the steps below to find climbs in the area you are looking</p>
 						</div>
 				</section>
 			</div>
 		</div>
-		<form action="<?php $_SERVER['PHP_SELF']; ?>">
-			<section class="module secondary">
-				<h4>location</h4>
-				<label>Zip Code
-					<input type="text" name="zip" placeholder="92120">
-				</label>
-				<input type="submit" value="Search Area">
-				<input type="hidden" name="did_submit" value="1">
-			</section>
-		</form>
+
 	</main>
 <?php include('aside.php'); ?>
 </div>
