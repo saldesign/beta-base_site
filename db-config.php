@@ -17,7 +17,7 @@ error_reporting( E_ALL & ~E_NOTICE);
 // define some URL / path constants to make linking easier
 // URL is for href, src
 // PATH is for includes
-define( 'ROOT_URL', 'http://localhost/betabase' );
-define ( 'ROOT_PATH', 'C:\xampp\htdocs\betabase');
+define( 'ROOT_URL', 'http://localhost/christian_php/betabase' );
+define ( 'ROOT_PATH', 'C:\xampp\htdocs\christian_php\betabase');
 
 // no close php
