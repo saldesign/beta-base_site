@@ -5,7 +5,7 @@
 	<aside>
 <?php 
 //	Get 3 recently published shares
-$query = "SELECT climbs.name, climbs.description, climbs.v_grade, climbs.y_grade, areas.title,  ratings.rating, users.username
+$query = "SELECT climbs.name, climbs.description, climbs.v_grade, climbs.y_grade, climbs.date, areas.title, ratings.rating, users.username
 			 FROM climbs, ratings, areas, users
 			 WHERE areas.is_approved = 1
 			 AND climbs.is_approved = 1
@@ -27,10 +27,14 @@ $query = "SELECT climbs.name, climbs.description, climbs.v_grade, climbs.y_grade
 			<h4>Recent Shares</h4>
 			<?php while($row = $result->fetch_assoc() ){ ?>
 			<article class="cf">
-				<h5><?php echo $row['name']; ?><span>V<?php echo $row['v_grade']; ?></span></h5>
-				<h6><?php echo $row['title'] ?><span class="ratings"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></span></h6>
-				<p>AUTHOR<span>DATE</span></p>
-				<p>A clean, short, 3 move, hand crack on the left most behive boulder</p>
+				<h5><?php echo $row['name']; ?><span>V<?php echo $row['v_grade'];
+				/* TODO:  
+					if( v_grade, echo 'v'.v_grade )
+					else( y_grade, echo 'first digit'.'.'.'last digits' )
+				*/ ?></span></h5>
+				<h6><?php echo $row['title']; ?><span class="ratings"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></span></h6>
+				<p><?php echo $row['username']; ?><span><?php echo nice_date($row['date']); ?></span></p>
+				<p><?php echo substr($row['description'], 0, 90); ?></p>
 				<a href="#" class="btn">Read More...</a>
 			</article>
 <?php

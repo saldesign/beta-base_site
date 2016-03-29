@@ -19,7 +19,7 @@
 				</section>
 			</div>
 		</div>
-		<form action="<?php $_SERVER['PHP_SELF']; ?>">
+		<form action="search.php" method="get">
 			<section class="module secondary">
 				<h4>location</h4>
 				<label>Zip Code
