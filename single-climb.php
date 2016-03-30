@@ -12,11 +12,10 @@
 	<main>
 		<?php 
 			//get 1 approved climb 
-			$query = "SELECT climbs.name, climbs.description, climbs.date, climbs.type, climbs.y_grade, climbs.v_grade, climbs.latitude, climbs.longitude, area.name, users.username, images.image, images.description, images.title, ratings.rating
+			$query = "SELECT climbs.name, climbs.description, climbs.date, climbs.type, climbs.y_grade, climbs.v_grade, areas.title, users.username, images.image, images.description, images.title, ratings.rating
 					FROM users, areas, climbs, images, ratings
 					WHERE climbs.is_approved = 1
 					AND areas.is_approved = 1
-					AND ratings.is_approved = 1
 
 					AND users.user_id = images.user_id 
 					AND users.user_id = climbs.user_id 

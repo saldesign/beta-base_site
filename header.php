@@ -1,3 +1,9 @@
+<?php 
+session_start(); 
+//if the user is returning with a valid cookie, re-create the session
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +25,27 @@
 		<a href="#menu" class="menu-link icon-menu"></a>
 		<nav class="main-nav cf" role="navigation">
 			<ul>
-				<li><a href="signin.php" class="<?php if($thisPage == "signin"){
+				<li><a href="<?php 
+					if( array_key_exists( 'secretkey', $_COOKIE ) 
+						AND array_key_exists( 'user_id', $_COOKIE ) ){
+						$_SESSION['secretkey'] = $_COOKIE['secretkey'];
+						$_SESSION['user_id'] = $_COOKIE['user_id'];
+						echo "admin/index.php";
+					}else{
+						echo "signin.php";
+					}
+				 ?>" class="<?php 
+				if($thisPage == "signin"){
 					echo "currentpage";
-					} ?>">Sign In/Up</a></li>
+					} 
+					?>"><?php 
+					if( array_key_exists( 'secretkey', $_COOKIE ) 
+						AND array_key_exists( 'user_id', $_COOKIE ) ){
+						echo "My Account";
+					}else{
+						echo "Sign In";
+					}
+				 ?></a></li>
 				<li><a href="about.php" class="<?php if($thisPage == "about"){
 					echo "currentpage";
 					} ?>">About</a></li>

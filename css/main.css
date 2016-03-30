@@ -478,12 +478,22 @@ footer a.terms{
 		width: 62%;
 		padding: 0 0 0 1rem;
 	}
-	main.register,
-	main.login{
-		clear:both;
-		padding:1rem;
-		width: 100%;
-	}
+		main.register,
+		main.signin{
+			clear:both;
+			padding:1rem;
+			width: 100%;
+		}
+		main.signin div.wrapper:first-child{
+			width: 50%;
+			float: left;
+			padding-right: .5rem;
+		}
+		main.signin div.wrapper:last-child{
+			width: 50%;
+			float: left;
+			padding-left: .5rem;
+		}
 		main .module.banner {
 		    min-height: 15rem;
 		}

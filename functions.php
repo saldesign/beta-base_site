@@ -12,14 +12,14 @@ function rss_date( $datetime ){
 	return $date->format( 'r' );
 }
 
-//count the comments on any one post
-//$post_id = INT the post you are counting comments for
-function count_comments( $post_id ){
+//count the comments on any one climb
+//$climb_id = INT the climb you are counting comments for
+function count_comments( $climb_id ){
 	global $db;
-	//count the approved comments on post #2
+	//count the approved comments on climb #2
 	$query = "SELECT COUNT(*) AS total
 						FROM comments
-						WHERE post_id = $post_id
+						WHERE climb_id = $climb_id
 						AND is_approved = 1";
 	//run it
 	$result = $db->query($query);
@@ -41,17 +41,17 @@ function field_error($problem){
 	}
 }
 
-//count the number of posts that any user has
+//count the number of climbs that any user has
 //@param $user_id = int. the ID of any user
-//@param $is_published = BOOLEAN. 1 = published posts (default)
+//@param $is_approved = BOOLEAN. 1 = published climbs (default)
 //											0 = drafts
-//@return int. the total number of posts
-function count_posts( $user_id, $is_published = 1){
+//@return int. the total number of climbs
+function count_climbs( $user_id, $is_approved = 1){
 	global $db;
 	$query = "SELECT COUNT(*) AS total
-				FROM posts 
+				FROM climbs 
 				WHERE user_id = $user_id
-				AND is_published = $is_published";
+				AND is_approved = $is_approved";
 	$result = $db->query($query);
 	// count will return one value / row
 	if(! $result){
@@ -62,19 +62,19 @@ function count_posts( $user_id, $is_published = 1){
 }
 
 /**
- * Show the post written by any user with the most comments
+ * Show the climb written by any user with the most comments
  * @param $user_id int.  Any user id.
- * @return string. the title and number of comments on that post
+ * @return string. the title and number of comments on that climb
  * @author Christian
  * @see https://www.phpdoc.org/
  */
-function most_popular_post( $user_id){
+function most_popular_climb( $user_id){
 	global $db;
-	$query = "SELECT COUNT(*) AS total, posts.title
-					FROM comments, posts
-					WHERE comments.post_id = posts.post_id
-					AND posts.user_id = $user_id
-					GROUP BY posts.post_id
+	$query = "SELECT COUNT(*) AS total, climbs.title
+					FROM comments, climbs
+					WHERE comments.climb_id = climbs.climb_id
+					AND climbs.user_id = $user_id
+					GROUP BY climbs.climb_id
 					ORDER BY total DESC
 					LIMIT 1";
 	$result = $db->query($query);
@@ -82,11 +82,11 @@ function most_popular_post( $user_id){
 		echo $db->error;
 	}
 	if($result->num_rows == 1){
-		//popular posts found! return the title of the post
+		//popular climbs found! return the title of the climb
 		$row = $result->fetch_assoc()
 ;		return $row['title'] . '(' . $row['total'] . ')';
 	}else{
-		return 'Your posts do not have any comments yet.';
+		return 'Your climbs do not have any comments yet.';
 	}
 }
 

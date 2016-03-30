@@ -5,7 +5,7 @@
 	<aside>
 <?php 
 //	Get 3 recently published shares
-$query = "SELECT climbs.name, climbs.description, climbs.v_grade, climbs.y_grade, climbs.date, areas.title, ratings.rating, users.username
+$query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grade, climbs.y_grade, climbs.date, areas.title, ratings.rating, users.username
 			 FROM climbs, ratings, areas, users
 			 WHERE areas.is_approved = 1
 			 AND climbs.is_approved = 1
@@ -19,7 +19,7 @@ $query = "SELECT climbs.name, climbs.description, climbs.v_grade, climbs.y_grade
 	if(!$result){
 		die($db->error);
 	}
-// Check to see if more than one post is found
+// Check to see if more than one climb is found
 	if($result->num_rows >= 1){
 		//loop through posts found
  ?>
@@ -27,7 +27,7 @@ $query = "SELECT climbs.name, climbs.description, climbs.v_grade, climbs.y_grade
 			<h4>Recent Shares</h4>
 			<?php while($row = $result->fetch_assoc() ){ ?>
 			<article class="cf">
-				<h5><?php echo $row['name']; ?><span>V<?php echo $row['v_grade'];
+				<h5><a href="single-climb.php?climb_id=<?php echo $row['climb_id']; ?>"><?php echo $row['name']; ?></a><span>V<?php echo $row['v_grade'];
 				/* TODO:  
 					if( v_grade, echo 'v'.v_grade )
 					else( y_grade, echo 'first digit'.'.'.'last digits' )

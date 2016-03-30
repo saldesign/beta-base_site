@@ -19,11 +19,11 @@
 				</section>
 			</div>
 		</div>
-		<form action="search.php" method="get">
+		<form action="search-result.php" method="get">
 			<section class="module secondary">
 				<h4>location</h4>
 				<label>Zip Code
-					<input type="text" name="zip" placeholder="92120">
+					<input type="text" name="zipcode" placeholder="92119">
 				</label>
 				<input type="submit" value="Search Area">
 				<input type="hidden" name="did_submit" value="1">

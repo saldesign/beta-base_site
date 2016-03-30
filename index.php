@@ -1,4 +1,6 @@
-<?php include('header.php');
+<?php 
+require('db-config.php'); //require will kill the page if it doesn't load successfully 
+include('header.php');
 include_once('functions.php');
  ?>
 
@@ -23,7 +25,7 @@ include_once('functions.php');
 				<div class="wrapper">
 					<section class="module">
 						<h3><span>Find</span></h3>
-						<div>
+						<div> 
 							<p class="icon-find cf">Find climbing route information, images, ratings, gradings, and coordinates to get there</p>
 							<a href="#" class="btn">Get Started</a>
 						</div>	
@@ -36,7 +38,7 @@ include_once('functions.php');
 						<h3><span>Join</span></h3>
 						<div>
 							<p class="icon-join cf">Become a member to keep a tick list of all the climbs you have done or want to do</p>
-							<a href="#" class="btn">Get Started</a>
+							<a href="signin.php" class="btn">Get Started</a>
 						</div>
 				</section>
 			</div>
