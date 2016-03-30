@@ -5,13 +5,12 @@ include_once('functions.php');
 //this has to be echoed because the <? symbol confuses the PHP parser
 echo '<?xml version="1.0"?>'; 
 //get up to 8 recent approved climbs
-$query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grade, climbs.y_grade, ratings.rating, users.username, users.email
-			FROM climbs, areas, ratings, users
+$query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grade, climbs.y_grade, users.username, users.email
+			FROM climbs, areas, users
 			WHERE climbs.is_approved = 1
-			AND are---as.is_approved = 1
+			AND areas.is_approved = 1
 			AND climbs.area_id = areas.area_id
 			AND climbs.user_id = users.user_id
-			AND climbs.climb_id = ratings.climb_id
 			ORDER BY climbs.date DESC
 			LIMIT 8";
 //run it

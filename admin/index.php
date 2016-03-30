@@ -109,4 +109,4 @@ include('admin-nav.php'); ?>
   </section>
 
 </main>
-<?php include(ROOT_PATH . '/admin/admin-footer.php') ?>
+<?php include('admin-footer.php') ?>

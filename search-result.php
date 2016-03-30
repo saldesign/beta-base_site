@@ -56,11 +56,8 @@ $total = $result->num_rows;
 			<h3>Viewing Page <?php echo $current_page; ?> of <?php echo $total_pages; ?></h3>
 			<?php while( $row = $result->fetch_assoc() ){ ?>
 			<article>
-				<h2>
-				<a href="single.php?climb_id=<?php echo $row['climb_id']; ?>">
-					<?php echo $row['name']; ?>
-				</a>
-				</h2>
+				<h2><a href="single-climb.php?climb_id=<?php echo $row['climb_id']; ?>">
+					<?php echo $row['name']; ?></a></h2>
 				<p><?php echo $row['description']; ?></p>
 				<span class="climb-meta"><?php echo nice_date($row['date']); ?></span>
 			</article>
@@ -99,7 +96,7 @@ $total = $result->num_rows;
 								echo $counter;
 							}
 						$counter++;
-						}//end whilde ?>
+						}//end while ?>
 			</section>
 
 

@@ -198,6 +198,7 @@ main{
 
 		.quicklinks .module{
 			margin-bottom: .5rem;
+			text-align: center;
 		}
 		.quicklinks .container:last-child section{
 			margin-bottom: 1rem;
