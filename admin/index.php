@@ -1,6 +1,7 @@
 <?php 
 require('../db-config.php'); //require will kill the page if it doesn't load successfully 
 include_once('../functions.php');
+include('../header.php');
 require('admin-header.php');
 include('admin-nav.php'); ?>
 

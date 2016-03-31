@@ -4,6 +4,40 @@
 	include('header.php'); 
 	include_once('functions.php');
 
+	//if the user is returning with a valid cookie, re-create the session
+	if( array_key_exists('secretkey', $_COOKIE) AND
+			array_key_exists('user_id', $_COOKIE) ){
+		$_SESSION['secretkey'] = $_COOKIE['secretkey'];
+		$_SESSION['user_id'] = $_COOKIE['user_id'];
+	}
+
+	//Password Protection
+	//Make sure secret key matches the one in the DB
+	$user_id = $_SESSION['user_id'];
+	$secretkey = $_SESSION['secretkey'];
+	$query = "SELECT * FROM users 
+					WHERE user_id = $user_id
+					AND secret_key = '$secretkey'
+					LIMIT 1";
+	$result = $db->query($query);
+	//if the query has an error because of a NULL user_id, send them back to login
+	if(!$result){
+		header('Location:../index.php');
+	}
+	//if no rows are found because they are not logged in, send them back to login
+	if($result->num_rows == 1){
+		// user successfully authenticated
+		//extract info about the user
+		$row = $result->fetch_assoc();
+
+		//define constants for any useful info about the logged in user
+		define( 'USER_ID',  $user_id);
+		define( 'USERNAME',  $row['username']);
+		define( 'IS_ADMIN',  $row['is_admin']);
+	}else{
+		header('Location:signin.php');
+	}
+
 	//parse the form
 	if($_POST['did_post']){
 	  //extract and sanitize
@@ -11,7 +45,10 @@
 	  $description = mysqli_real_escape_string($db, $_POST['description']);
 	  $is_approved = mysqli_real_escape_string($db, $_POST['is_approved']);
 	  $area_id = mysqli_real_escape_string($db, $_POST['area_id']);
-	  $area_id = mysqli_real_escape_string($db, $_POST['area_id']);
+	  $v_grade = mysqli_real_escape_string($db, $_POST['v_grade']);
+	  $y_grade = mysqli_real_escape_string($db, $_POST['y_grade']);
+	  $type = mysqli_real_escape_string($db, $_POST['type']);
+	  $rating = mysqli_real_escape_string($db, $_POST['rating']);
 	  //validate
 	  $valid = true;
 	  //title and description can't be blank
@@ -23,17 +60,18 @@
 	  if($is_approved != 1){
 	    $is_approved = 0;
 	  }
-	  //category must be int
-	  if(! is_numeric( $area_id)){
-	    $valid = false;
-	    $errors[] = 'Please choose a valid category';
-	  }
-	  //if valid, add to DB
+	  //area_id must be int
+	  // if(! is_numeric( $area_id)){
+	  //   $valid = false;
+	  //   $errors[] = 'Please choose a valid area_id';
+	  // }
+
+	  // if valid, add to DB
 	  if($valid){    
 	    $query = "INSERT INTO climbs
-	              ( name, date, description, user_id, area_id, is_approved)
+	              ( name, date, description, v_grade, y_grade, type, user_id, area_id, is_approved)
 	              VALUES
-	              ('$title', now(), '$description', " . USER_ID . ", $area_id, $is_approved) ";
+	              ('$name', now(), '$description', $v_grade, $y_grade, '$type', " . USER_ID . ", $area_id, $is_approved) ";
 	    $result = $db->query($query);
 	    if(! $result){
 	      echo $db->error;
@@ -41,6 +79,18 @@
 	    //make sure 1 row was added, show user feedback
 	    if($db->affected_rows == 1){
 	      $message = 'Your climb was saved';
+
+	      //insert rating into ratings table
+	      $climb_id = $db->insert_id;
+	      $query = "INSERT INTO ratings 
+	      				( climb_id, rating, user_id )
+	      			 VALUES 
+	      			 	(  $climb_id, $rating, " . USER_ID . " )";
+	      $result = $db->query($query);
+
+	      if(! $result){
+	      	echo $db->error;
+	      }
 	    }else{
 	      $message = 'Sorry, Your climb was not saved';
 	    }
@@ -104,28 +154,30 @@
 			<label>Which area does this climb belong to?</label>
 				<select name="area_id">
 				  <?php while($row = $result->fetch_assoc() ){ ?>
-				  <option value="<?php echo $row['area_id']; ?>" <?php 
-				  selected($area_id, $row['area_id']); ?>>
-				  <?php echo $row['title']; ?>
+				  <option 
+				  		value="<?php echo stripslashes($row['area_id']); ?>" 
+						<?php selected($area_id, $row['area_id']); ?>>
+						<?php echo $row['title']; ?>
 				  </option>
 				  <?php }// end while ?>
 				</select>
 			<?php }// end if areas ?>
 
 			<label>Climb Description</label>
-				<input type="text" name="description" value="<?php echo stripslashes($description); ?>"></input>
-			<h5>Latitude &amp; Longitude</h5>
-			<p><a href="http://www.latlong.net/" title="latitude longitude finder">latitude longitude finder</a><p>
-			<label>Longitude Coordinate</label>
-			<input type="text" name="longitude" value="<?php echo stripslashes($longitude); ?>">
-			<label>Latitude Coordinate</label>
-			<input type="text" name="latitude" value="<?php echo stripslashes($latitude); ?>">
+				<textarea name="description" value="<?php echo stripslashes($description); ?>"></textarea>
+			<label>Type of Climb:</label>
+				<select name="type">
+					<option value="Boulder">Boulder</option>
+					<option value="Top Rope">Top Rope</option>
+					<option value="Sport">Sport</option>
+					<option value="Trad">Trad</option>
+				</select>
+			<label>
 
-			<h5>Grading &amp; Rating</h5>
-			<p>* Choose either Difficulty Grade: V-Sale or Yosemite Decimal Scale</p>
+			<h4>Grading &amp; Rating</h4>
 			<label>Difficulty: V-Scale</label>
-				<select name="v_scale">
-					<option value="na">Not Applicable</option>
+				<select name="v_grade">
+					<option value="NULL">Not Applicable</option>
 					<option value="0">V0</option>
 					<option value="1">V1</option>
 					<option value="2">V2</option>
@@ -142,13 +194,14 @@
 					<option value="13">V13</option>
 					<option value="14">V14</option>
 				</select>
+
 				<label>Difficulty: Yosemite Decimal Scale</label>
-					<select name="v_scale">
-						<option value="na">Not Applicable</option>
+					<select name="y_grade">
+						<option value="NULL">Not Applicable</option>
 						<option value="5.5">5.5</option>
 						<option value="5.6">5.6</option>
-						<option value="5.6">5.7</option>
-						<option value="5.7">5.8</option>
+						<option value="5.7">5.7</option>
+						<option value="5.8">5.8</option>
 						<option value="5.9">5.9</option>
 						<option value="5.10">5.10</option>
 						<option value="5.10a">5.10a</option>
@@ -176,6 +229,15 @@
 						<option value="5.14c">5.14c</option>
 						<option value="5.14d">5.14d</option>
 					</select>
+
+				<label>Rate this climb: 1 - 5 Stars</label>
+					<select name="rating">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>
 				<label>
 				  <input type="checkbox" name="is_approved" value="1" <?php checked( $is_approved, 1) ?>>
 				  Make this climb public
@@ -186,22 +248,6 @@
 		</section>
 	</main>
 </div>
-<!-- 
-Select Area or Climb
-Select Type of Climb
-Input 
-	Area/Climb Name, 
-	if(climb){Area name}, 
-	Description, 
-	Zip Code, 
-	Coordinates, 
-	Grade, 
-	Rating
- -->
-
-
-
-
 <?php include('aside.php'); ?>
 </div>
 <?php include('footer.php'); ?>

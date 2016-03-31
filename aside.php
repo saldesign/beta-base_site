@@ -3,6 +3,8 @@
 	include_once('functions.php');
 ?>
 	<aside>
+		<section class="module secondary">
+			<h4>Recent Shares</h4>
 <?php 
 //	Get 3 recently published shares
 $query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grade, climbs.y_grade, climbs.date, areas.title, ratings.rating, users.username
@@ -12,7 +14,8 @@ $query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grad
 			 AND climbs.area_id = areas.area_id
 			 AND climbs.user_id = users.user_id
 			 AND climbs.climb_id = ratings.climb_id
-			 ORDER BY climbs.date DESC";
+			 ORDER BY climbs.date DESC
+			 LIMIT 5";
 // Run query
 	$result = $db->query($query);
 // If bad result, display db error
@@ -23,8 +26,6 @@ $query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grad
 	if($result->num_rows >= 1){
 		//loop through posts found
  ?>
-		<section class="module secondary">
-			<h4>Recent Shares</h4>
 			<?php while($row = $result->fetch_assoc() ){ ?>
 			<article class="cf">
 				<h5><a href="single-climb.php?climb_id=<?php echo $row['climb_id']; ?>"><?php echo $row['name']; ?></a><span>V<?php echo $row['v_grade'];

@@ -8,13 +8,18 @@ include_once('functions.php');
 //logout action
 if($_GET['action'] == 'logout'){
 	//destroy the session, make all cookies null and expired
+	session_unset();
 	session_destroy();
-
+	session_write_close();
+	setcookie(session_name(),'',0,'/');
+	session_regenerate_id(true);
 	unset($_SESSION['secretkey']);
 	setcookie('secretkey', '', time() -999999);
 
 	unset($_SESSION['user_id']);
 	setcookie('user_id', '', time() -999999);
+
+	header('location:signin.php');
 
 }//end logout action
 
@@ -70,7 +75,7 @@ if($_POST['did_login']){
 				die($db->error);
 			}else{
 				//redirect to admin panel 
-				header('Location:admin/');
+				header('Location:index.php');
 			}
 		}else{
 			//error

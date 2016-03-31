@@ -420,6 +420,9 @@ footer a.terms{
 	clear: both;
 	line-height: 2rem;
 }
+footer a.currentpage {
+	color:#ffd666;
+}
 
 
 

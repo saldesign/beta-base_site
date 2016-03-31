@@ -1,5 +1,6 @@
 <?php 
 require('db-config.php'); //require will kill the page if it doesn't load successfully 
+$thisPage="home";
 include('header.php');
 include_once('functions.php');
  ?>
@@ -8,7 +9,7 @@ include_once('functions.php');
 
 	<main>
 		<section class="module banner">
-			<h2><span>Where climbers come</span><span> to <a href="#">share</a> and <a href="#">find</a></span><span> rock climbing beta</span></h2>
+			<h2><span>Where climbers come</span><span> to <a href="share.php">share</a> and <a href="find.php">find</a></span><span> rock climbing beta</span></h2>
 		</section>
 
 		<div class="quicklinks cf">
@@ -18,7 +19,7 @@ include_once('functions.php');
 						<h3><span>Share</span></h3>
 						<div>
 							<p class="icon-share cf">Share developed climbing routes along with descriptions, gradings, ratings, coordinates and images</p>
-							<a href="#" class="btn">Get Started</a>
+							<a href="share.php" class="btn">Get Started</a>
 						</div>
 					</section>
 				</div>
@@ -27,7 +28,7 @@ include_once('functions.php');
 						<h3><span>Find</span></h3>
 						<div> 
 							<p class="icon-find cf">Find climbing route information, images, ratings, gradings, and coordinates to get there</p>
-							<a href="#" class="btn">Get Started</a>
+							<a href="find.php" class="btn">Get Started</a>
 						</div>	
 					</section>
 				</div>

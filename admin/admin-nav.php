@@ -10,6 +10,7 @@
     <li class="comments"><a href="#">Comments</a></li>
     <li class="users"><a href="#">Manage Users</a></li>
 <?php }else{ ?>
+  <li><a href="../index.php">Home</a></li>
 	<li class="dashboard"><a href="index.php">Dashboard</a></li>
 	<li class="users"><a href="#">Manage Users</a></li>
 <?php } ?>

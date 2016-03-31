@@ -1,8 +1,6 @@
 <?php 
 session_start(); 
 //if the user is returning with a valid cookie, re-create the session
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +8,7 @@ session_start();
 	<meta charset="utf-8">
 	<meta name="viewport" content="initial-scale=1.0">
 
-	<title>Home - Beta-Base</title>
+	<title><?php echo $thisPage; ?> - Beta-Base</title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link href="font/css/beta-base.css" rel="stylesheet" type="text/css" />
 	<link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,500italic,400italic,700,500|Open+Sans:400,600,700,400italic,600italic' rel='stylesheet' type='text/css'>
