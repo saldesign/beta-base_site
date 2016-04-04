@@ -1,8 +1,8 @@
-<?php $thisPage="about"; ?>
-
-
-<?php include('header.php'); ?>
-
+<?php 
+include('userheader.php');
+$thisPage="about";
+include_once('header.php');
+?>
 <div class="maincontainer">
 	<main>
 		<section class="module banner">

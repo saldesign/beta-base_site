@@ -1,12 +1,11 @@
 <?php 
+	include('userheader.php'); 
 // Single Climb With Comments 
 // link to this file like this:
 	// single-climb.php?climb_id=x
 	$climb_id = $_GET['climb_id'];
-	require('db-config.php'); //require will kill the page if it doesn't load successfully 
-	include_once('functions.php');
-	// include('comment-parse.php');
 	include('header.php');
+	include('comment-parse.php');
 ?>
 <div class="maincontainer">
 	<main>
@@ -22,7 +21,6 @@
 					AND users.user_id = climbs.user_id 
 
 					AND areas.area_id = climbs.area_id 
-
 
 					AND climbs.climb_id = $climb_id
 
@@ -43,6 +41,8 @@
 			?>
 				<h2><?php echo $row['name']; ?></h2>				
 				<div>
+				<?php echo $row['area_id'] ?>
+
 					<p>Author: <?php echo $row['username']; ?></p>
 					<p>Posted on: <?php echo nice_date($row['date']);?></p>
 					<p>Type:<?php echo $row['type']; ?></p>
@@ -54,12 +54,11 @@
 				}//end while loop
 				$result->free();
 
-				$query = "SELECT  comments.body, users.username, comments.date 
-							 FROM comments, users, climbs, areas
+				$query = "SELECT  comments.body, users.username, comments.date, users.user_id
+							 FROM comments, users
 							 WHERE comments.climb_id = $climb_id
-							 AND areas.area_id = $climb_id
-							 AND comments.is_approved = 1
 							 AND users.user_id = comments.user_id
+							 AND comments.is_approved = 1
 							 ORDER BY date DESC";
 			 // run it
 			 	$result = $db->query($query);
@@ -72,6 +71,7 @@
 			<ul>
 				<?php while( $row = $result->fetch_assoc() ){ ?>
 				<li>
+
 					<h3><?php echo $row['username']; ?> 
 					on <?php echo nice_date($row['date']); ?></h3>
 					<p><?php echo $row['body'] ?></p>
@@ -88,7 +88,12 @@
 			else{
 				echo 'No climbs found';
 			}//end if no climbs found
-			include ('comment-form.php');
+			if(
+				$user_id = $_SESSION['user_id'] &&
+				$secretkey = $_SESSION['secretkey']
+				){
+			include ('comment-form.php');	
+			}
 
 			?> 
 		</section>

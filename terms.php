@@ -1,7 +1,8 @@
-<?php $thisPage="terms"; ?>
-
-
-<?php include('header.php'); ?>
+<?php 
+include('userheader.php'); 
+$thisPage="terms"; 
+include_once('header.php');
+?>
 
 <div class="maincontainer">
 	<main>

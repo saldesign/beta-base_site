@@ -1,8 +1,7 @@
 <?php 
-require('db-config.php'); //require will kill the page if it doesn't load successfully 
+include('userheader.php');
 $thisPage="home";
 include('header.php');
-include_once('functions.php');
  ?>
 
 <div class="maincontainer">

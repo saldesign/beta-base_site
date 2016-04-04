@@ -1,7 +1,5 @@
 <?php 
-//connect to DB
-require('db-config.php');
-include_once('functions.php');
+include('userheader.php');
 //this has to be echoed because the <? symbol confuses the PHP parser
 echo '<?xml version="1.0"?>'; 
 //get up to 8 recent approved climbs

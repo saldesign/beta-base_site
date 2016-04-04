@@ -28,11 +28,10 @@ $query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grad
  ?>
 			<?php while($row = $result->fetch_assoc() ){ ?>
 			<article class="cf">
-				<h5><a href="single-climb.php?climb_id=<?php echo $row['climb_id']; ?>"><?php echo $row['name']; ?></a><span>V<?php echo $row['v_grade'];
-				/* TODO:  
-					if( v_grade, echo 'v'.v_grade )
-					else( y_grade, echo 'first digit'.'.'.'last digits' )
-				*/ ?></span></h5>
+				<h5><a href="single-climb.php?climb_id=<?php echo $row['climb_id']; ?>"><?php echo $row['name']; ?></a><span><?php
+						echo $row['y_grade'];
+						echo $row['v_grade'];
+					?></span></h5>
 				<h6><?php echo $row['title']; ?><span class="ratings"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></span></h6>
 				<p><?php echo $row['username']; ?><span><?php echo nice_date($row['date']); ?></span></p>
 				<p><?php echo substr($row['description'], 0, 90); ?></p>

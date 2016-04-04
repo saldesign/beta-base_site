@@ -1,7 +1,3 @@
-<?php 
-session_start(); 
-//if the user is returning with a valid cookie, re-create the session
-?>
 <!DOCTYPE html>
 <html>
 <head>

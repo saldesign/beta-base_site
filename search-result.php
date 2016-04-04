@@ -1,7 +1,6 @@
 <?php 
+	include('userheader.php');
 	$thisPage="find"; 
-	require('db-config.php'); //require will kill the page if it doesn't load successfully 
-	include_once('functions.php');
 	include('header.php');
 //search configuration
 	$per_page = 8;

@@ -3,7 +3,7 @@
 	<?php 
 	//parser feedback
 	if(isset($message)){
-		echo $message;
+		echo '<div class="message">' . $message . '</div>';
 	}
 	 ?>
 	<form action="#comment-form" method="post">

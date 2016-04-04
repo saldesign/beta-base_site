@@ -1,9 +1,6 @@
 <?php 
-session_start();
+include('userheader.php');
 $thisPage="signin";
-require('db-config.php');
-include_once('functions.php');
-
 
 //logout action
 if($_GET['action'] == 'logout'){

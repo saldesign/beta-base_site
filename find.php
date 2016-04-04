@@ -1,7 +1,7 @@
-<?php $thisPage="find"; ?>
-
-
-<?php include('header.php'); ?>
+<?php 
+include('userheader.php');
+$thisPage="find"; 
+include('header.php'); ?>
 
 <div class="maincontainer">
 	<main>

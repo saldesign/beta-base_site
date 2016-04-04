@@ -1,10 +1,9 @@
 <?php 
-	//convert datetime format to nice looking date
-	function nice_date( $datetime ){
-		$date = new DateTime( $datetime );
-		return $date->format('l,  F j');
-	}
-
+//convert datetime format to nice looking date
+function nice_date( $datetime ){
+	$date = new DateTime( $datetime );
+	return $date->format('l,  F j');
+}
 
 //convert datetime format to RFC 822 format for the feed
 function rss_date( $datetime ){
@@ -104,5 +103,41 @@ function checked($thing1, $thing2){
 function selected($thing1, $thing2){
 	if($thing1 == $thing2){
 		echo 'selected';
+	}
+}
+
+function signedin($redirect = 0){
+		global $db;
+		if( array_key_exists('secretkey', $_COOKIE) AND
+			array_key_exists('user_id', $_COOKIE) ){
+		$_SESSION['secretkey'] = $_COOKIE['secretkey'];
+		$_SESSION['user_id'] = $_COOKIE['user_id'];
+	}
+
+	//Password Protection
+	//Make sure secret key matches the one in the DB
+	$user_id = $_SESSION['user_id'];
+	$secretkey = $_SESSION['secretkey'];
+	$query = "SELECT * FROM users 
+					WHERE user_id = $user_id
+					AND secret_key = '$secretkey'
+					LIMIT 1";
+	$result = $db->query($query);
+	if(!$result && $redirect == 1){
+		header('Location:'.ROOT_URL.'/signin.php');
+	}
+	if($result->num_rows == 1){
+		// user successfully authenticated
+		//extract info about the user
+		$row = $result->fetch_assoc();
+
+		//define constants for any useful info about the logged in user
+		define( 'USER_ID',  $user_id);
+		define( 'USERNAME',  $row['username']);
+		define( 'IS_ADMIN',  $row['is_admin']);
+	}else {
+		if($redirect == 1){
+			header('Location:'.ROOT_URL.'/signin.php');
+		}
 	}
 }

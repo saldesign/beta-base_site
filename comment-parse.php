@@ -1,16 +1,10 @@
 <?php 
 //This file handles Inserting one comment into the DB
-
-
-
-
 if($_POST['did_comment']){
-
 	//extract and sanitize the form data
 	$body = strip_tags(mysqli_real_escape_string($db, $_POST['body']));
-
 	//TODO: make this work with the logged in user
-	$user_id=1;
+	// $user_id=3;
 	//validate it
 	$valid = true;
 	if($body == ''){
@@ -21,7 +15,7 @@ if($_POST['did_comment']){
 		 $query = "INSERT INTO comments
 							( body, user_id, date, is_approved, climb_id )
 							VALUES
-							( '$body', $user_id, now(), 1, $climb_id )";
+							( '$body', ".USER_ID.", now(), 1, $climb_id )";
 		// run it
 		$result = $db->query($query);
 

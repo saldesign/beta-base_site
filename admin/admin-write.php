@@ -1,8 +1,7 @@
 <?php 
-require('../db-config.php'); //require will kill the page if it doesn't load successfully 
-include_once( '../functions.php');
 require( 'admin-header.php');
 include( 'admin-nav.php');
+$thisPage="Admin Write";
 
 //parse the form
 if($_POST['did_post']){
