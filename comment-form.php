@@ -1,4 +1,4 @@
-<article>
+<article id="comment-form">
 	<h4>Leave a comment:</h4>
 	<?php 
 	//parser feedback

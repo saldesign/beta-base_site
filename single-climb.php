@@ -54,9 +54,10 @@
 				}//end while loop
 				$result->free();
 
-				$query = "SELECT  users.username, comments.body, comments.date 
-							 FROM comments, users
+				$query = "SELECT  comments.body, users.username, comments.date 
+							 FROM comments, users, climbs, areas
 							 WHERE comments.climb_id = $climb_id
+							 AND areas.area_id = $climb_id
 							 AND comments.is_approved = 1
 							 AND users.user_id = comments.user_id
 							 ORDER BY date DESC";
@@ -83,11 +84,12 @@
 				else{
 					echo '<h4>No comments found</h4>';
 				}
-					include ('comment-form.php');
 			} //end if climbs found
 			else{
 				echo 'No climbs found';
 			}//end if no climbs found
+			include ('comment-form.php');
+
 			?> 
 		</section>
 	</main>
