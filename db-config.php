@@ -18,6 +18,7 @@ error_reporting( E_ALL & ~E_NOTICE);
 // URL is for href, src
 // PATH is for includes
 define( 'ROOT_URL', 'http://localhost/christian_php/beta-base_site' );
-define ( 'ROOT_PATH', 'C:\xampp\htdocs\christian_php\beta-base_site');
+// define ( 'ROOT_PATH', 'C:\xampp\htdocs\christian_php\beta-base_site');
+define ( 'ROOT_PATH', '/applications/XAMPP/xamppfiles/htdocs\christian_php\beta-base_site');
 
 // no close php

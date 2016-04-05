@@ -13,7 +13,7 @@
 	  $area_id = mysqli_real_escape_string($db, $_POST['area_id']);
 	  $v_grade = mysqli_real_escape_string($db, $_POST['v_grade']);
 	  $y_grade = mysqli_real_escape_string($db, $_POST['y_grade']);
-	  $type = mysqli_real_escape_string($db, $_POST['type']);
+	  $type = mysqli_real_escape_string($db, implode(',',$_POST['type']) );
 	  $rating = mysqli_real_escape_string($db, $_POST['rating']);
 	  //validate
 	  $valid = true;
@@ -26,6 +26,11 @@
 	  if($is_approved != 1){
 	    $is_approved = 0;
 	  }
+	  //checkboxes must be 1 or 0 (not blank)
+	  if($is_approved != 1){
+	    $is_approved = 0;
+	  }
+
 	  //area_id must be int
 	  // if(! is_numeric( $area_id)){
 	  //   $valid = false;
@@ -37,7 +42,7 @@
 	    $query = "INSERT INTO climbs
 	              ( name, date, description, v_grade, y_grade, type, user_id, area_id, is_approved)
 	              VALUES
-	              ('$name', now(), '$description', $v_grade, $y_grade, '$type', " . USER_ID . ", $area_id, $is_approved) ";
+	              ('$name', now(), '$description', '$v_grade', '$y_grade', '$type', " . USER_ID . ", $area_id, $is_approved) ";
 	    $result = $db->query($query);
 	    if(! $result){
 	      echo $db->error;
@@ -131,34 +136,40 @@
 
 			<label>Climb Description</label>
 				<textarea name="description" value="<?php echo stripslashes($description); ?>"></textarea>
-			<label>Type of Climb:</label>
-				<select name="type">
-					<option value="Boulder">Boulder</option>
-					<option value="Top Rope">Top Rope</option>
-					<option value="Sport">Sport</option>
-					<option value="Trad">Trad</option>
-				</select>
-			<label>
+			<legend>Type of Climb:
+					<label for="boulder">Boulder
+						<input type="checkbox" name="type[]" id="boulder" value="Boulder">
+					</label>
+					<label for="top-rope">Top Rope
+						<input type="checkbox" name="type[]" id="top-rope" value="Top Rope">
+					</label>
+					<label for="sport">Sport
+						<input type="checkbox" name="type[]" id="sport" value="Sport">
+					</label>
+					<label for="trad">Trad
+						<input type="checkbox" name="type[]" id="trad" value="Trad">
+					</label>
+			</legend>
 
 			<h4>Grading &amp; Rating</h4>
 			<label>Difficulty: V-Scale</label>
 				<select name="v_grade">
 					<option value="NULL">Not Applicable</option>
-					<option value="0">V0</option>
-					<option value="1">V1</option>
-					<option value="2">V2</option>
-					<option value="3">V3</option>
-					<option value="4">V4</option>
-					<option value="5">V5</option>
-					<option value="6">V6</option>
-					<option value="7">V7</option>
-					<option value="8">V8</option>
-					<option value="9">V9</option>
-					<option value="10">V10</option>
-					<option value="11">V11</option>
-					<option value="12">V12</option>
-					<option value="13">V13</option>
-					<option value="14">V14</option>
+					<option value="V0">V0</option>
+					<option value="V1">V1</option>
+					<option value="V2">V2</option>
+					<option value="V3">V3</option>
+					<option value="V4">V4</option>
+					<option value="V5">V5</option>
+					<option value="V6">V6</option>
+					<option value="V7">V7</option>
+					<option value="V8">V8</option>
+					<option value="V9">V9</option>
+					<option value="V10">V10</option>
+					<option value="V11">V11</option>
+					<option value="V12">V12</option>
+					<option value="V13">V13</option>
+					<option value="V14">V14</option>
 				</select>
 
 				<label>Difficulty: Yosemite Decimal Scale</label>
@@ -206,7 +217,7 @@
 					</select>
 				<label>
 				  <input type="checkbox" name="is_approved" value="1" <?php checked( $is_approved, 1) ?>>
-				  Make this climb public
+				  <p>Make this climb public</p>
 				</label>
 				<input class="btn" type="submit" value="Save Climb">
 				<input type="hidden" name="did_post" value="1">

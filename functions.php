@@ -69,7 +69,7 @@ function count_climbs( $user_id, $is_approved = 1){
  */
 function most_popular_climb( $user_id){
 	global $db;
-	$query = "SELECT COUNT(*) AS total, climbs.title
+	$query = "SELECT COUNT(*) AS total, climbs.name
 					FROM comments, climbs
 					WHERE comments.climb_id = climbs.climb_id
 					AND climbs.user_id = $user_id
@@ -83,9 +83,46 @@ function most_popular_climb( $user_id){
 	if($result->num_rows == 1){
 		//popular climbs found! return the title of the climb
 		$row = $result->fetch_assoc()
-;		return $row['title'] . '(' . $row['total'] . ')';
+;		return $row['name'] . '(' . $row['total'] . ')';
 	}else{
 		return 'Your climbs do not have any comments yet.';
+	}
+}
+
+function count_areas( $user_id, $is_approved = 1){
+	global $db;
+	$query = "SELECT COUNT(*) AS total
+				FROM areas
+				WHERE user_id = $user_id
+				AND is_approved = $is_approved";
+	$result = $db->query($query);
+	// count will return one value / row
+	if(! $result){
+		echo $db->error;
+	}
+	$row = $result->fetch_assoc();
+	return $row['total'];
+}
+
+function most_popular_area( $user_id){
+	global $db;
+	$query = "SELECT COUNT(*) AS total, areas.title
+					FROM comments, areas
+					WHERE comments.area_id = areas.area_id
+					AND areas.user_id = $user_id
+					GROUP BY areas.area_id
+					ORDER BY total DESC
+					LIMIT 1";
+	$result = $db->query($query);
+	if(! $result){
+		echo $db->error;
+	}
+	if($result->num_rows == 1){
+		//popular areas found! return the title of the area
+		$row = $result->fetch_assoc()
+;		return $row['title'] . '(' . $row['total'] . ')';
+	}else{
+		return 'Your areas do not have any comments yet.';
 	}
 }
 
@@ -124,7 +161,7 @@ function signedin($redirect = 0){
 					LIMIT 1";
 	$result = $db->query($query);
 	if(!$result && $redirect == 1){
-		header('Location:'.ROOT_URL.'/signin.php');
+		header('Location:'.ROOT_PATH.'/signin.php');
 	}
 	if($result->num_rows == 1){
 		// user successfully authenticated
@@ -137,7 +174,7 @@ function signedin($redirect = 0){
 		define( 'IS_ADMIN',  $row['is_admin']);
 	}else {
 		if($redirect == 1){
-			header('Location:'.ROOT_URL.'/signin.php');
+			header('Location:'.ROOT_PATH.'/signin.php');
 		}
 	}
 }

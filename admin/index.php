@@ -15,11 +15,17 @@ $thisPage="Admin Home";
     </ul>
   </section>
   <section class="panel">
-    <h2>Your Stats:</h2>
+    <h2>Your Climb Stats:</h2>
     <ul>
       <li><b><?php echo count_climbs(USER_ID ); ?> </b>Published climbs</li>
       <li><b><?php echo count_climbs(USER_ID,0 ); ?></b> Drafts.</li>
       <li>Most popular climb: <b><?php echo most_popular_climb(USER_ID); ?></b>.</li>
+    </ul>
+    <h2>Your Area Stats:</h2>
+    <ul>
+      <li><b><?php echo count_areas(USER_ID ); ?> </b>Published areas</li>
+      <li><b><?php echo count_areas(USER_ID,0 ); ?></b> Drafts.</li>
+      <li>Most popular area: <b><?php echo most_popular_area(USER_ID); ?></b>.</li>
     </ul>
   </section>
   <section class="panel">

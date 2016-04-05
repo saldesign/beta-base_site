@@ -7,7 +7,7 @@
 			<h4>Recent Shares</h4>
 <?php 
 //	Get 3 recently published shares
-$query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grade, climbs.y_grade, climbs.date, areas.title, ratings.rating, users.username
+$query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grade, climbs.y_grade, climbs.date, areas.area_id, areas.title, ratings.rating, users.username
 			 FROM climbs, ratings, areas, users
 			 WHERE areas.is_approved = 1
 			 AND climbs.is_approved = 1
@@ -32,7 +32,7 @@ $query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grad
 						echo $row['y_grade'];
 						echo $row['v_grade'];
 					?></span></h5>
-				<h6><?php echo $row['title']; ?><span class="ratings"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></span></h6>
+				<h6><a href="single-area.php?area_id=<?php echo $row['area_id']; ?>"><?php echo $row['title']; ?></a><span class="ratings"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></span></h6>
 				<p><?php echo $row['username']; ?><span><?php echo nice_date($row['date']); ?></span></p>
 				<p><?php echo substr($row['description'], 0, 90); ?></p>
 				<a href="#" class="btn">Read More...</a>

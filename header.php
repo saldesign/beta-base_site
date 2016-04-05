@@ -20,10 +20,7 @@
 		<nav class="main-nav cf" role="navigation">
 			<ul>
 				<li><a href="<?php 
-					if( array_key_exists( 'secretkey', $_COOKIE ) 
-						AND array_key_exists( 'user_id', $_COOKIE ) ){
-						$_SESSION['secretkey'] = $_COOKIE['secretkey'];
-						$_SESSION['user_id'] = $_COOKIE['user_id'];
+					if( $redirect == 0 ){
 						echo "admin/index.php";
 					}else{
 						echo "signin.php";
@@ -33,8 +30,7 @@
 					echo "currentpage";
 					} 
 					?>"><?php 
-					if( array_key_exists( 'secretkey', $_COOKIE ) 
-						AND array_key_exists( 'user_id', $_COOKIE ) ){
+					if( $redirect == 0 ){
 						echo "My Account";
 					}else{
 						echo "Sign In";

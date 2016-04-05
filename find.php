@@ -21,11 +21,11 @@ include('header.php'); ?>
 		</div>
 		<form action="search-result.php" method="get">
 			<section class="module secondary">
-				<h4>location</h4>
-				<label>Zip Code
-					<input type="text" name="zipcode" placeholder="92119">
+				<h4>Locate Climbs and Areas</h4>
+				<label>Search by Name, Zipcode, Keyword, Difficulty Grading
+					<input type="text" name="phrase" placeholder="Search by Name, Zipcode, Keyword, Difficulty Grading">
 				</label>
-				<input type="submit" value="Search Area">
+				<input type="submit" value="Search ">
 				<input type="hidden" name="did_submit" value="1">
 			</section>
 		</form>

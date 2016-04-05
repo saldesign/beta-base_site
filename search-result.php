@@ -5,29 +5,33 @@
 //search configuration
 	$per_page = 8;
 	$current_page = 1; //start page
-//what zipcode did the user search
-// URL looks like search-result.php?zipcode=value
-$zipcode = mysqli_real_escape_string($db, $_GET['zipcode']);
-//get all the climbs whose zipcode or description match the zipcode
-$query = "SELECT climb_id, zipcode, name, title, climbs.description, climbs.date 
+//what phrase did the user search
+// URL looks like search-result.php?phrase=value
+$phrase = mysqli_real_escape_string($db, $_GET['phrase']);
+//get all the climbs whose name or description or  match the phrase
+$query = "SELECT climbs.climb_id, climbs.type, areas.area_id, zipcode, name, title, climbs.description, climbs.date
 					FROM climbs, areas
 					WHERE climbs.is_approved = 1
+					AND areas.is_approved = 1
 					AND climbs.area_id = areas.area_id
-					AND ( zipcode like '%$zipcode%' OR climbs.description LIKE '%$zipcode%' )";
+					AND ( name like '%$phrase%'
+					 OR climbs.description LIKE '%$phrase%'
+					 OR climbs.type LIKE '%$phrase%'
+					 OR climbs.v_grade LIKE '%$phrase%'
+					 OR climbs.y_grade LIKE '%$phrase%'
+					 OR areas.title LIKE '%$phrase%'
+					 OR areas.description LIKE '%$phrase%'
+					 OR areas.zipcode LIKE '%$phrase%'
+					  )";
 //run it
 $result = $db->query($query);
 //check it
 if(!$result){
 	echo $db->error;
 }
-//how many total climbs were found
+//how many total climbs or areas were found
 $total = $result->num_rows;
 ?>
-
-
-
-
-
 <div class="maincontainer">
 	<main>
 	<?php if($total >= 1){ 
@@ -35,7 +39,7 @@ $total = $result->num_rows;
 		$total_pages = ceil($total/$per_page);
 
 		//what page is the user trying to view?
-		//the URL will look like search-result.php?zipcode=x&pages=2
+		//the URL will look like search-result.php?phrase=x&pages=2
 		if($_GET['page']) {
 			$current_page = $_GET['page'];
 		}
@@ -67,7 +71,7 @@ $total = $result->num_rows;
 			<section class="pagination">
 
 				<?php if($current_page > 1){ ?>
-				<a href="search-result.php?zipcode=<?php echo $zipcode; ?>&amp;page=<?php echo $prev_page; ?>" class="prev">
+				<a href="search-result.php?phrase=<?php echo $phrase; ?>&amp;page=<?php echo $prev_page; ?>" class="prev">
 					Previous Page
 				</a>
 				<?php }else{ ?>
@@ -75,7 +79,7 @@ $total = $result->num_rows;
 				<?php } ?>
 				<?php //check if there is a next page
 				if( $next_page <= $total_pages ){ ?>
-				<a href="search-result.php?zipcode=<?php echo $zipcode; ?>&amp;page=<?php echo $next_page; ?>" class="next">
+				<a href="search-result.php?phrase=<?php echo $phrase; ?>&amp;page=<?php echo $next_page; ?>" class="next">
 					Next Page
 				</a>
 				<?php }else{ ?>
@@ -86,7 +90,7 @@ $total = $result->num_rows;
 				$counter = 1;
 				while($counter <= $total_pages){
 					if( $counter != $current_page){	 ?>
-					<a href="search-result.php?zipcode=<?php echo $zipcode; ?>&amp;page=<?php echo $counter; ?>">
+					<a href="search-result.php?phrase=<?php echo $phrase; ?>&amp;page=<?php echo $counter; ?>">
 						<?php echo $counter ?>
 					</a>
 
