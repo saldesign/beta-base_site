@@ -1,5 +1,6 @@
 <?php 
 include('userheader.php'); 
+signedin();
 $thisPage="terms"; 
 include_once('header.php');
 ?>

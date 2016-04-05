@@ -10,10 +10,21 @@ if($_POST['did_comment']){
 	//Where was the form submitted from? single-climb or single-area
 		//if valid, add to db
 		if($valid){
-			 $query = "INSERT INTO comments
-								( body, user_id, date, is_approved, climb_id )
-								VALUES
-								( '$body', ".USER_ID.", now(), 1, $climb_id )";
+			
+			if(isset($_GET['area_id']) ){
+				$query = "INSERT INTO comments
+									( body, user_id, date, is_approved, area_id )
+									VALUES
+									( '$body', ".constant("USER_ID").", now(), 1, $area_id )";
+			}else{
+				$query = "INSERT INTO comments
+									( body, user_id, date, is_approved, climb_id )
+									VALUES
+									( '$body', ".constant("USER_ID").", now(), 1, $climb_id )";
+			}
+				
+
+
 			// run it
 			$result = $db->query($query);
 

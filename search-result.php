@@ -1,5 +1,6 @@
 <?php 
 	include('userheader.php');
+	signedin();
 	$thisPage="find"; 
 	include('header.php');
 //search configuration

@@ -1,5 +1,6 @@
 <?php 
 	include('userheader.php');
+	signedin();
 	$thisPage="share";
 	include('header.php'); 
 ?>

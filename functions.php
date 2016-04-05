@@ -178,3 +178,31 @@ function signedin($redirect = 0){
 		}
 	}
 }
+
+function show_pic_area( $area_id, $size = 'thumb'){
+	global $db;
+	$query = "SELECT image 
+				 FROM images 
+				 WHERE area_id = $area_id";
+	$result = $db->query($query);
+	if(!$result){
+		echo $db->error;
+	}
+	if($result->num_rows >= 1){
+		while($row = $result->fetch_assoc() ){
+			echo '<img class="thumb" src="' . ROOT_URL . '/uploads/'. $row['image'] . '_' . $size . '.jpg" alt="image">';
+		}
+	}else{
+		echo 'there are no images';
+	}
+
+	// if($result->num_rows >= 1){
+	// 	$row = $result->fetch_assoc();
+	// 	if($row['image'] == ''){
+	// 		echo 'there are no images';
+	// 	}else{
+	// 		echo '<img class="thumb" src="' . ROOT_URL . '/uploads/'. $row['image'] . '_' . $size . '.jpg" alt="image">';
+	// 	}
+	// }
+
+}

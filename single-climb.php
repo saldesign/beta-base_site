@@ -1,5 +1,6 @@
 <?php 
 	include('userheader.php'); 
+	signedin();
 // Single Climb With Comments 
 // link to this file like this:
 	// single-climb.php?climb_id=x

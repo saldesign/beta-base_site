@@ -6,6 +6,9 @@
 
 	//parse the form
 	if($_POST['did_post']){
+		//where images will be stored
+
+
 	  //extract and sanitize
 	  $title = mysqli_real_escape_string($db, $_POST['title']);
 	  $description = mysqli_real_escape_string($db, $_POST['description']);
@@ -25,11 +28,12 @@
 	  if($is_approved != 1){
 	    $is_approved = 0;
 	  }
-	  //area_id must be int
-	  // if(! is_numeric( $area_id)){
-	  //   $valid = false;
-	  //   $errors[] = 'Please choose a valid area_id';
-	  // }
+
+
+
+
+
+
 
 	  // if valid, add to DB
 	  if($valid){    
@@ -95,7 +99,7 @@
 
 		 ?>
 
-			<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
+			<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 				<h4>Area Details</h4>	
 				<label>Area Name</label>
 					<input type="text" name="title" value="<?php echo stripslashes($title); ?>"></input>
@@ -115,11 +119,11 @@
 					<input type="text" name="longitude">
 				<label>Latitude Coordinates</label>
 					<input type="text" name="latitude">
-
 				<label>
 				  <input type="checkbox" name="is_approved" value="1" <?php checked( $is_approved, 1) ?>>
 				  Make this climb public
 				</label>
+
 				<input class="btn" type="submit" value="Save area">
 				<input type="hidden" name="did_post" value="1">
 			</form>

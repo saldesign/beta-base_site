@@ -1,5 +1,6 @@
 <?php 
 	include('userheader.php'); 
+	signedin();
 // Single Climb With Comments 
 // link to this file like this:
 	// single-climb.php?climb_id=x
@@ -7,6 +8,7 @@
 	//TODO: set this page to current area
 	include('header.php');
 	include('comment-parse.php');
+	include('image-parser.php');
 ?>
 <div class="maincontainer">
 	<main>
@@ -52,6 +54,9 @@
 			<?php
 				}//end while loop
 				$result->free();
+				show_pic_area($area_id, 'medium');
+				include ('image-form.php');	
+
 
 				$query = "SELECT  comments.body, users.username, comments.date, users.user_id
 							 FROM comments, users
