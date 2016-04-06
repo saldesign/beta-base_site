@@ -1,5 +1,5 @@
 <article class="form">
-<h4>Leave a comment:</h4>
+<h4>Post an Image:</h4>
 <?php 
 //parser feedback
 if(isset($image_message)){

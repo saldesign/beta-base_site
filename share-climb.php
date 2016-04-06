@@ -135,7 +135,7 @@
 			<?php }// end if areas ?>
 
 			<label>Climb Description</label>
-				<textarea name="description" value="<?php echo stripslashes($description); ?>"></textarea>
+				<textarea name="description"><?php echo stripslashes($description); ?></textarea>
 			<legend>Type of Climb:
 					<label for="boulder">Boulder
 						<input type="checkbox" name="type[]" id="boulder" value="Boulder">

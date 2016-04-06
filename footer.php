@@ -4,21 +4,18 @@
 				<h2><a href="#"><span>Beta-Base Rock Climbing Guide</span></a></h2>
 				<span class="btncontainer">
 					<a class="btn" href="<?php 
-						if( array_key_exists( 'secretkey', $_COOKIE ) 
-							AND array_key_exists( 'user_id', $_COOKIE ) ){
-							$_SESSION['secretkey'] = $_COOKIE['secretkey'];
-							$_SESSION['user_id'] = $_COOKIE['user_id'];
+					if(defined('IS_LOGGED_IN')){
 							echo "admin/index.php";
 						}else{
 							echo "signin.php";
 						}
 					 ?>" class="<?php 
-					if($thisPage == "signin"){
+					 if(defined('IS_LOGGED_IN')){
 						echo "currentpage";
 						} 
 						?>"><?php 
-						if( array_key_exists( 'secretkey', $_COOKIE ) 
-							AND array_key_exists( 'user_id', $_COOKIE ) ){
+						if(defined('IS_LOGGED_IN')){
+
 							echo "My Account";
 						}else{
 							echo "Sign In";

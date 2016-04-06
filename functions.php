@@ -134,6 +134,19 @@ function checked($thing1, $thing2){
 		echo 'checked';
 	}
 }
+
+
+/**
+	*Helper for checking a checkbox if a value is in an array
+*/
+function checked_array($array, $value){
+	if(in_array($value, $array) ){
+		echo 'checked';
+	}
+}
+
+
+
 /**
 	*Helper for selecting an option in a dropdown if two values match
 */
@@ -144,8 +157,11 @@ function selected($thing1, $thing2){
 }
 
 function signedin($redirect = 0){
+	session_start();
 		global $db;
-		if( array_key_exists('secretkey', $_COOKIE) AND
+
+	//re-build the session if the cookie is still valid
+	if( array_key_exists('secretkey', $_COOKIE) AND
 			array_key_exists('user_id', $_COOKIE) ){
 		$_SESSION['secretkey'] = $_COOKIE['secretkey'];
 		$_SESSION['user_id'] = $_COOKIE['user_id'];
@@ -172,6 +188,7 @@ function signedin($redirect = 0){
 		define( 'USER_ID',  $user_id);
 		define( 'USERNAME',  $row['username']);
 		define( 'IS_ADMIN',  $row['is_admin']);
+		define( 'IS_LOGGED_IN', true );
 	}else {
 		if($redirect == 1){
 			header('Location:'.ROOT_URL.'/signin.php');
@@ -195,14 +212,22 @@ function show_pic_area( $area_id, $size = 'thumb'){
 	}else{
 		echo 'there are no images';
 	}
+}
 
-	// if($result->num_rows >= 1){
-	// 	$row = $result->fetch_assoc();
-	// 	if($row['image'] == ''){
-	// 		echo 'there are no images';
-	// 	}else{
-	// 		echo '<img class="thumb" src="' . ROOT_URL . '/uploads/'. $row['image'] . '_' . $size . '.jpg" alt="image">';
-	// 	}
-	// }
-
+function show_pic_climb( $climb_id, $size = 'thumb'){
+	global $db;
+	$query = "SELECT image 
+				 FROM images 
+				 WHERE climb_id = $climb_id";
+	$result = $db->query($query);
+	if(!$result){
+		echo $db->error;
+	}
+	if($result->num_rows >= 1){
+		while($row = $result->fetch_assoc() ){
+			echo '<img class="thumb" src="' . ROOT_URL . '/uploads/'. $row['image'] . '_' . $size . '.jpg" alt="image">';
+		}
+	}else{
+		echo 'there are no images';
+	}
 }

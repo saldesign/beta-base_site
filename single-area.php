@@ -10,6 +10,7 @@
 	include('comment-parse.php');
 	include('image-parser.php');
 ?>
+
 <div class="maincontainer">
 	<main>
 		<section class="module">
@@ -36,6 +37,7 @@
 				die($db->error);
 			}
 
+
 		//check to see if more than 1 climb was found
 			if($result->num_rows >= 1){
 
@@ -55,8 +57,9 @@
 				}//end while loop
 				$result->free();
 				show_pic_area($area_id, 'medium');
-				include ('image-form.php');	
-
+				if(defined('IS_LOGGED_IN')){
+					include ('image-form.php');	
+				}	
 
 				$query = "SELECT  comments.body, users.username, comments.date, users.user_id
 							 FROM comments, users
@@ -92,13 +95,9 @@
 			else{
 				echo 'No climbs found';
 			}//end if no climbs found
-			if(
-				$user_id = $_SESSION['user_id'] &&
-				$secretkey = $_SESSION['secretkey']
-				){
-			include ('comment-form.php');	
-			}
-
+			if(defined('IS_LOGGED_IN')){
+				include ('comment-form.php');	
+			}	
 			?> 
 		</section>
 	</main>

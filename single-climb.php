@@ -8,6 +8,7 @@
 	//TODO: set this page to current climb
 	include('header.php');
 	include('comment-parse.php');
+	include('image-parser.php');
 ?>
 <div class="maincontainer">
 	<main>
@@ -54,7 +55,7 @@
 			<?php
 				}//end while loop
 				$result->free();
-				show_pic_area($climb_id, 'medium');
+				show_pic_climb($climb_id, 'medium');
 				include ('image-form.php');
 
 				$query = "SELECT  comments.body, users.username, comments.date

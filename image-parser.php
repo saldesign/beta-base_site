@@ -61,16 +61,16 @@ if($_POST['did_upload']){
 
   			if($did_save){
   				//Add image data to image table
-          if(isset($_GET['area_id']) ){
+          if(isset($_GET['climb_id']) ){
     				$query = "INSERT INTO images 
-                        (image, user_id, area_id, is_approved)
-    							    VALUES
-                        ('$uniquestring',". constant("USER_ID") .",$area_id, 1)";
-          }else{
-            $query = "INSERT INTO images 
                         (image, user_id, climb_id, is_approved)
                       VALUES
-                        ('$uniquestring',". constant("USER_ID") .",$climb_id, 1)";            
+                        ('$uniquestring',". constant("USER_ID") .",$climb_id, 1)";
+          }else{
+            $query = "INSERT INTO images 
+                        (image, user_id, area_id, is_approved)
+                      VALUES
+                        ('$uniquestring',". constant("USER_ID") .",$area_id, 1)";            
           }
   				$result = $db->query($query);
   				if(! $result){

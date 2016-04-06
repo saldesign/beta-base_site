@@ -20,7 +20,7 @@
 		<nav class="main-nav cf" role="navigation">
 			<ul>
 				<li><a href="<?php 
-					if( $redirect == 0 ){
+				if(defined('IS_LOGGED_IN')){
 						echo "admin/index.php";
 					}else{
 						echo "signin.php";
@@ -30,7 +30,7 @@
 					echo "currentpage";
 					} 
 					?>"><?php 
-					if( $redirect == 0 ){
+					if(defined('IS_LOGGED_IN')){
 						echo "My Account";
 					}else{
 						echo "Sign In";
