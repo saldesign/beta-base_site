@@ -161,7 +161,7 @@ function signedin($redirect = 0){
 					LIMIT 1";
 	$result = $db->query($query);
 	if(!$result && $redirect == 1){
-		header('Location:'.ROOT_PATH.'/signin.php');
+		header('Location:'.ROOT_URL.'/signin.php');
 	}
 	if($result->num_rows == 1){
 		// user successfully authenticated
@@ -174,7 +174,7 @@ function signedin($redirect = 0){
 		define( 'IS_ADMIN',  $row['is_admin']);
 	}else {
 		if($redirect == 1){
-			header('Location:'.ROOT_PATH.'/signin.php');
+			header('Location:'.ROOT_URL.'/signin.php');
 		}
 	}
 }

@@ -54,6 +54,8 @@
 			<?php
 				}//end while loop
 				$result->free();
+				show_pic_area($climb_id, 'medium');
+				include ('image-form.php');
 
 				$query = "SELECT  comments.body, users.username, comments.date
 							 FROM comments, users

@@ -4,115 +4,164 @@ require('admin-header.php');
 include('admin-nav.php');
 include('admin-nav.php');
 $thisPage="Edit Admin";
+
+// //which post are we editing? the URL looks like admin-edit.php?post_id=x
+// $post_id = $_GET['post_id'];
+
+// //parse the form
+// if( $_POST['did_post'] ){
+//     //extract and sanitize
+//     $title          = mysqli_real_escape_string($db, $_POST['title']);
+//     $body           = mysqli_real_escape_string($db, $_POST['body']);
+//     $is_published   = mysqli_real_escape_string($db, $_POST['is_published']);
+//     $allow_comments = mysqli_real_escape_string($db, $_POST['allow_comments']);
+//     $category_id    = mysqli_real_escape_string($db, $_POST['category_id']);
+    
+//     //validate
+//     $valid = true;
+//     //title & body can't be blank
+//     if( $title == '' OR $body == '' ){
+//         $valid = false;
+//         $errors[] = 'Title and body are required';
+//     }
+//     //checkboxes must be 1 or 0 (not blank)
+//     if($is_published != 1){
+//         $is_published = 0;
+//     }
+//     if($allow_comments != 1){
+//         $allow_comments = 0;
+//     }
+//     //cat must be int
+//     if( ! is_numeric( $category_id ) ){
+//         $valid = false;
+//         $errors[] = 'Please choose a valid category';
+//     }
+//     //if valid, update the row in the DB
+//     if($valid){
+//         $query = "UPDATE posts
+//                     SET
+//                     title           = '$title',
+//                     body            = '$body',
+//                     is_published    = $is_published,
+//                     allow_comments  = $allow_comments,
+//                     category_id     = $category_id
+//                     WHERE post_id = $post_id
+//                     AND user_id = " . USER_ID ;
+
+//         $result = $db->query($query);
+//         if(! $result){
+//             echo $db->error;
+//         }
+//         //make sure 1 row was added, then handle user feedback
+//         if( $db->affected_rows == 1 ){
+//             $message = 'Success! Your post was saved';
+//             $status = 'success';
+//         }else{
+//             $message = 'No changes were made.';
+//             $status = 'information';
+//         }
+//     }//end if valid
+//     else{
+//         $message = 'Please fix these errors in the form:';
+//         $status = 'error';
+//     }
+    
+// }//end of parser
+
+
+//get all the info about this climb, and make sure the climb was written by the logged in user
+$query_climb = "SELECT * 
+                FROM climbs 
+                WHERE user_id = " . USER_ID . 
+                " AND climb_id = $climb_id 
+                LIMIT 1";
+$result_climb = $db->query($query_climb);
+
+?> 
  ?>
 
  <main role="main">
-   <section class="panel important">
-     <h2>Welcome to Your Dashboard <?php echo USERNAME; ?></h2>
-     <ul>
-       <li>Account Type: <?php echo IS_ADMIN == 1 ? 'Administrator' : 'Commenter'; ?></li>
-     </ul>
-   </section>
-   <section class="panel">
-     <h2>Your Climb Stats:</h2>
-     <ul>
-       <li><b><?php echo count_climbs(USER_ID ); ?> </b>Published climbs</li>
-       <li><b><?php echo count_climbs(USER_ID,0 ); ?></b> Drafts.</li>
-       <li>Most popular climb: <b><?php echo most_popular_climb(USER_ID); ?></b>.</li>
-     </ul>
-     <h2>Your Area Stats:</h2>
-     <ul>
-       <li><b><?php echo count_areas(USER_ID ); ?> </b>Published areas</li>
-       <li><b><?php echo count_areas(USER_ID,0 ); ?></b> Drafts.</li>
-       <li>Most popular area: <b><?php echo most_popular_area(USER_ID); ?></b>.</li>
-     </ul>
-   </section>
-   <section class="panel">
-     <h2>Chart</h2>
-     <ul>
-       <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-       <li>Aliquam tincidunt mauris eu risus.</li>
-       <li>Vestibulum auctor dapibus neque.</li>
-     </ul>
-   </section>
-   <section class="panel important">
-     <h2>Post a climb</h2>
-     <form action="#">
-       <div class="twothirds">
-         <label for="name">Text Input:</label>
-         <input type="text" name="name" id="name" placeholder="John Smith" />
+     <section class="important panel">
 
-         <label for="textarea">Textarea:</label>
-         <textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+         <?php //kill the page if viewing an invalid climb
+         if( ! $result_climb ){
+             echo $db->error;
+         } 
+         if( $result_climb->num_rows != 1 ){
+             die('You do not have permission to edit that climb.');
+         } 
 
-       </div>
-       <div class="onethird">
-         <legend>Radio Button Choice</legend>
+         //get the info from the DB result
+         $row_climb = $result_climb->fetch_assoc();
+         
+         $name = $row_climb['name'];
+         $description = $row_climb['description'];
+         $is_approved = $row_climb['is_approved'];
+         $title = $row_climb['title'];
+         ?>
 
-         <label for="radio-choice-1">
-           <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" /> Choice 1
-         </label>
+         <h2>Edit Post</h2>
 
-         <label for="radio-choice-2">
-           <input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2" /> Choice 2
-         </label>
+         <?php //show feedback if the form was submitted
+         if( $_POST['did_post'] ){
+             echo '<div class="feedback ' . $status . '">';
+             echo $message;
+             
+             //if there are little errors, show them in a list
+             if(! empty($errors)){
+                 echo '<ul>';
+                 foreach( $errors as $item ){
+                     echo '<li>' .  $item . '</li>';
+                 }
+                 echo '</ul>';
+             }
 
+             echo '</div>';
+         } ?>
+ <form action="<?php echo $_SERVER['PHP_SELF']; ?>?climb_id=<?php echo $climb_id; ?>" method="post">
+             <div class="twothirds">
+                 <label>Title:</label>
+                 <input type="text" name="name" 
+                 value="<?php echo stripslashes($name); ?>">
 
-         <label for="select-choice">Select Dropdown Choice:</label>
-         <select name="select-choice" id="select-choice">
-           <option value="Choice 1">Choice 1</option>
-           <option value="Choice 2">Choice 2</option>
-           <option value="Choice 3">Choice 3</option>
-         </select>
+                 <label>Description:</label>
+                 <textarea name="description"><?php echo stripslashes($description); ?></textarea>
+             </div>
+             <div class="onethird">
+                 <label>
+                     <input type="checkbox" name="is_published" value="1" <?php checked( $is_published, 1 ) ?>>
+                     Make this post public
+                 </label>
 
+                 <label>
+                     <input type="checkbox" name="allow_comments" value="1" <?php checked( $allow_comments, 1 ) ?>>
+                     Allow users to comment on this post
+                 </label>
 
-         <div>
-           <label for="checkbox">
-             <input type="checkbox" name="checkbox" id="checkbox" /> Checkbox
-           </label>
-         </div>
+                 <?php //get all the categories in alphabetical order 
+                 $query = "SELECT * FROM categories
+                 ORDER BY name ASC";
+                 $result = $db->query($query);
+                 if(! $result){
+                     echo $db->error;
+                 }
+                 if($result->num_rows >= 1){
+                     ?>
+                     <label>Category:</label>
+                     <select name="category_id">
+                         <?php while( $row = $result->fetch_assoc() ){ ?>
 
-         <div>
-           <input type="submit" value="Submit" />
-         </div>
-       </div>
-     </form>
-   </section>
-   <section class="panel">
-     <h2>feedback</h2>
-     <div class="feedback">This is neutral feedback Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, praesentium. Libero perspiciatis quis aliquid iste quam dignissimos, accusamus temporibus ullam voluptatum, tempora pariatur, similique molestias blanditiis at sunt earum neque.</div>
-     <div class="feedback error">This is warning feedback
- <ul>
-   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-   <li>Aliquam tincidunt mauris eu risus.</li>
-   <li>Vestibulum auctor dapibus neque.</li>
- </ul>  </div>
-     <div class="feedback success">This is positive feedback</div>
+                         <option value="<?php echo $row['category_id']; ?>" <?php selected( $category_id, $row['category_id'] ); ?>>
+                             <?php echo $row['name']; ?>
+                         </option>
 
-   </section>
-   <section class="panel ">
-     <h2>Table</h2>
-     <table>
-       <tr>
-         <th>Username</th>
-         <th>climbs</th>
-         <th>comments</th>
-         <th>date</th>
-       </tr>
-       <tr>
-         <td>Pete</td>
-         <td>4</td>
-         <td>7</td>
-         <td>Oct 10, 2015</td>
+                         <?php }//end while ?>
+                     </select>
+                     <?php }//end if there are cats ?>
 
-       </tr>
-       <tr>
-         <td>Mary</td>
-         <td>5769</td>
-         <td>2517</td>
-         <td>Jan 1, 2014</td>
-       </tr>
-     </table>
-   </section>
-
- </main>
+                     <input type="submit" value="Save Post">
+                     <input type="hidden" name="did_post" value="1">
+                 </div>
+             </form>
+         </section>
+</main>

@@ -2,8 +2,8 @@
 <h4>Leave a comment:</h4>
 <?php 
 //parser feedback
-if(isset($message)){
-  echo '<div class="message">' . $message . '</div>';
+if(isset($image_message)){
+  echo '<div class="message">' . $image_message . '</div>';
 }
  ?>
   <form method="post" action="#image-form" 

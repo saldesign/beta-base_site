@@ -34,7 +34,7 @@ if($_POST['did_upload']){
 				break;
 
 				default:
-				$message = 'The only allowed filetypes are png, gif and jpg';
+				$image_message = 'The only allowed filetypes are png, gif and jpg';
 				$status = 'error';
   			}//end of filetype switch
 
@@ -74,19 +74,19 @@ if($_POST['did_upload']){
           }
   				$result = $db->query($query);
   				if(! $result){
-  					$message = $db->error;
+  					$image_message = $db->error;
   					$status = 'error';
   				}
   				if($db->affected_rows == 1){
-  				    $message = 'Success! Your Area Image has been updated';
+  				    $image_message = 'Success! Your Area Image has been updated';
   				    $status = 'success';
   				}else{
-  				    $message = 'Sorry, your Area Image could not be changed';
+  				    $image_message = 'Sorry, your Area Image could not be changed';
   				    $status = 'error';
   				}
   			}//end if did save
   			else{
-  			    $message = 'Sorry, your image could not be saved. Try again.';
+  			    $image_message = 'Sorry, your image could not be saved. Try again.';
   			    $status = 'error';
   			}
 	  }//end validate image

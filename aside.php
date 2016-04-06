@@ -6,7 +6,7 @@
 		<section class="module secondary">
 			<h4>Recent Shares</h4>
 <?php 
-//	Get 3 recently published shares
+//	Get 5 recently published shares
 $query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grade, climbs.y_grade, climbs.date, areas.area_id, areas.title, ratings.rating, users.username
 			 FROM climbs, ratings, areas, users
 			 WHERE areas.is_approved = 1
