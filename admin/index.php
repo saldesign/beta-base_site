@@ -8,113 +8,76 @@ $thisPage="Admin Home";
 
 
 <main role="main">
-  <section class="panel important">
-    <h2>Welcome to Your Dashboard <?php echo USERNAME; ?></h2>
-    <ul>
-      <li>Account Type: <?php echo IS_ADMIN == 1 ? 'Administrator' : 'Commenter'; ?></li>
-    </ul>
-  </section>
-  <section class="panel">
-    <h2>Your Climb Stats:</h2>
-    <ul>
-      <li><b><?php echo count_climbs(USER_ID ); ?> </b>Published climbs</li>
-      <li><b><?php echo count_climbs(USER_ID,0 ); ?></b> Drafts.</li>
-      <li>Most popular climb: <b><?php echo most_popular_climb(USER_ID); ?></b>.</li>
-    </ul>
-    <h2>Your Area Stats:</h2>
-    <ul>
-      <li><b><?php echo count_areas(USER_ID ); ?> </b>Published areas</li>
-      <li><b><?php echo count_areas(USER_ID,0 ); ?></b> Drafts.</li>
-      <li>Most popular area: <b><?php echo most_popular_area(USER_ID); ?></b>.</li>
-    </ul>
-  </section>
-  <section class="panel">
-    <h2>Chart</h2>
-    <ul>
-      <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-      <li>Aliquam tincidunt mauris eu risus.</li>
-      <li>Vestibulum auctor dapibus neque.</li>
-    </ul>
-  </section>
-  <section class="panel important">
-    <h2>Post a climb</h2>
-    <form action="#">
-      <div class="twothirds">
-        <label for="name">Text Input:</label>
-        <input type="text" name="name" id="name" placeholder="John Smith" />
+     <section class="module">
+         <h2>Manage Your Climbs:</h2>
 
-        <label for="textarea">Textarea:</label>
-        <textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+         <?php //get all the climbs added by the logged in user
+         $query = "SELECT climbs.name, climbs.climb_id, climbs.description, climbs.v_grade, climbs.y_grade, climbs.date, areas.area_id, areas.title, climbs.is_approved
+               FROM climbs, areas
+               WHERE climbs.area_id = areas.area_id
+               AND climbs.user_id = " . USER_ID . " 
+               ORDER BY climbs.date DESC";
+         $result = $db->query($query);
+         if(! $result){
+             echo $db->error;
+         }
+         if($result->num_rows >= 1){
+         ?>
+         <table>
+             <tr>
+                 <th>Climb</th>
+                 <th>Status</th>
+                 <th>Date</th>
+                 <th>Area</th>
+             </tr>
+             <?php while( $row = $result->fetch_assoc() ){ ?>
+             <tr>
+                 <td><a href="admin-edit.php?climb_id=<?php echo $row['climb_id']; ?>"><?php echo $row['name']; ?></a></td>
+                 <td><?php echo $row['is_approved'] == 1 ? 'Public' : '<b>Draft</b>';?></td>
+                 <td><?php echo nice_date($row['date']); ?></td>
+                 <td><?php echo $row['title']; ?></td>
+             </tr> 
+             <?php } //end while ?>
+         </table>
+         <?php 
+         }//end if rows found 
+         else{
+             echo 'You haven\'t written any posts yet';
+         }?>
+     </section>     
+     <section class="module">
+         <h2>Manage Your Areas:</h2>
 
-      </div>
-      <div class="onethird">
-        <legend>Radio Button Choice</legend>
-
-        <label for="radio-choice-1">
-          <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" /> Choice 1
-        </label>
-
-        <label for="radio-choice-2">
-          <input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2" /> Choice 2
-        </label>
-
-
-        <label for="select-choice">Select Dropdown Choice:</label>
-        <select name="select-choice" id="select-choice">
-          <option value="Choice 1">Choice 1</option>
-          <option value="Choice 2">Choice 2</option>
-          <option value="Choice 3">Choice 3</option>
-        </select>
-
-
-        <div>
-          <label for="checkbox">
-            <input type="checkbox" name="checkbox" id="checkbox" /> Checkbox
-          </label>
-        </div>
-
-        <div>
-          <input type="submit" value="Submit" />
-        </div>
-      </div>
-    </form>
-  </section>
-  <section class="panel">
-    <h2>feedback</h2>
-    <div class="feedback">This is neutral feedback Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, praesentium. Libero perspiciatis quis aliquid iste quam dignissimos, accusamus temporibus ullam voluptatum, tempora pariatur, similique molestias blanditiis at sunt earum neque.</div>
-    <div class="feedback error">This is warning feedback
-<ul>
-  <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-  <li>Aliquam tincidunt mauris eu risus.</li>
-  <li>Vestibulum auctor dapibus neque.</li>
-</ul>  </div>
-    <div class="feedback success">This is positive feedback</div>
-
-  </section>
-  <section class="panel ">
-    <h2>Table</h2>
-    <table>
-      <tr>
-        <th>Username</th>
-        <th>climbs</th>
-        <th>comments</th>
-        <th>date</th>
-      </tr>
-      <tr>
-        <td>Pete</td>
-        <td>4</td>
-        <td>7</td>
-        <td>Oct 10, 2015</td>
-
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>5769</td>
-        <td>2517</td>
-        <td>Jan 1, 2014</td>
-      </tr>
-    </table>
-  </section>
-
-</main>
-<?php include('admin-footer.php') ?>
+         <?php //get all the areas added by the logged in user
+         $query = "SELECT areas.area_id, areas.title, users.username, areas.is_approved
+               FROM areas, users
+               WHERE areas.user_id = users.user_id
+               ORDER BY areas.date DESC";
+         $result = $db->query($query);
+         if(! $result){
+             echo $db->error;
+         }
+         if($result->num_rows >= 1){
+         ?>
+         <table>
+             <tr>
+                 <th>Area</th>
+                 <th>Status</th>
+                 <th>Date</th>
+             </tr>
+             <?php while( $row = $result->fetch_assoc() ){ ?>
+             <tr>
+                 <td><a href="admin-edit.php?area_id=<?php echo $row['area_id']; ?>"><?php echo $row['title']; ?></a></td>
+                 <td><?php echo $row['is_approved'] == 1 ? 'Public' : '<b>Draft</b>';?></td>
+                 <td><?php echo nice_date($row['date']); ?></td>
+             </tr> 
+             <?php } //end while ?>
+         </table>
+         <?php 
+         }//end if rows found 
+         else{
+             echo 'You haven\'t written any posts yet';
+         }?>
+     </section> 
+ </main>
+<?php include('../footer.php') ?>

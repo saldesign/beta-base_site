@@ -322,7 +322,7 @@ td {
     left: 0;
     width: 100%;
     z-index: 99;
-    height: 75px;
+    height: 2.5rem;
   }
   header[role=banner] .utilities {
     position: absolute;
@@ -341,8 +341,8 @@ td {
 
   nav[role=navigation] {
     position: fixed;
-    width: 200px;
-    top: 75px;
+    width: 12rem;
+    top: 2.5rem;
     bottom: 0px;
   }
 

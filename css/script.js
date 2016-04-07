@@ -1,11 +1,10 @@
-//Menu Icon Switch
-
 $(document).ready(function() {
+//Add class js and set variables
   $('body').addClass('js');
   var $menulink = $('.menu-link'),
   $mainnav = $('.main-nav');
   
-
+//Menu Click Icon Switch
   $menulink.click(function() {
    $(this).toggleClass('active');
    $mainnav.toggleClass('active');
@@ -16,6 +15,35 @@ $(document).ready(function() {
 	  }
 	  return false;
 	});//End menulink.click
+
+
+//Ratings
+  //Star Click
+  $(":radio").click(function() { 
+      //get the value of the category they clicked
+      var rating = this.value;      
+      var climb_id = $(this).data("id");        
+      //create an ajax request to display.php
+      $.ajax({   
+          type: "GET",
+          url: "rate-parse.php",  
+          data: { 'rating': rating, 'climb_id' : climb_id },   
+          dataType: "html",   //expect html to be returned
+        success: function(response){
+          $("#display-area").html(response);
+          }
+      });
+  });
+   //do stuff during and after ajax is loading (like visual feedback)
+  $(document).on({
+      ajaxStart: function() { $("#display-area").addClass("loading");    },
+      ajaxStop: function() { $("#display-area").removeClass("loading"); } 
+  });
+
+
+
+
+
 
 /*
   // Show or hide the sticky back to top button

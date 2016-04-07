@@ -43,12 +43,31 @@
 			while($row = $result->fetch_assoc() ){ 
 			?>
 				<h2><?php echo $row['name']; ?></h2>				
-				<h3><?php echo $row['title']; ?></h3>				
+				<h3 class="bar_underline"><?php echo $row['title']; ?></h3>	
+
+				<form action="#" method="post">
+					<label>Rate this climb: 1 - 5 Stars</label>
+						<div id="display-area"></div>
+						<span class="star-rating">
+						  <input type="radio" name="rating" value="1" data-id="<?php echo $climb_id; ?>"><i></i>
+						  <input type="radio" name="rating" value="2" data-id="<?php echo $climb_id; ?>"><i></i>
+						  <input type="radio" name="rating" value="3" data-id="<?php echo $climb_id; ?>"><i></i>
+						  <input type="radio" name="rating" value="4" data-id="<?php echo $climb_id; ?>"><i></i>
+						  <input type="radio" name="rating" value="5" data-id="<?php echo $climb_id; ?>"><i></i>
+						</span>
+				</form>
+
 				<div>
 					<p>Author: <?php echo $row['username']; ?></p>
 					<p>Posted on: <?php echo nice_date($row['date']);?></p>
 					<p>Type:<?php echo $row['type']; ?></p>
-					<p>Grade:<?php echo $row['y_grade']; echo $row['v_grade']; ?></p>
+					<p>Grade:<?php
+						if($row['v_grade'] == NULL){
+							echo $row['y_grade'];
+						}else{
+							echo $row['v_grade'];
+						}					
+					?></p>
 					<p><?php echo $row['rating']; ?></p>
 					<p><?php echo $row['description']; ?></p>
 				</div>
@@ -56,8 +75,9 @@
 				}//end while loop
 				$result->free();
 				show_pic_climb($climb_id, 'medium');
-				include ('image-form.php');
-
+				if(defined('IS_LOGGED_IN')==true){
+					include ('image-form.php');
+				}
 				$query = "SELECT  comments.body, users.username, comments.date
 							 FROM comments, users
 							 WHERE comments.climb_id = $climb_id
@@ -92,7 +112,7 @@
 			else{
 				echo 'No climbs found';
 			}//end if no climbs found
-			if( redirect == 0){
+			if(defined('IS_LOGGED_IN')==true){
 			include ('comment-form.php');	
 			}
 

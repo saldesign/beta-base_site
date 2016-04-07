@@ -1,5 +1,6 @@
 <?php 
 include('userheader.php');
+signedin();
 $thisPage="home";
 include('header.php');
  ?>
@@ -32,7 +33,7 @@ include('header.php');
 					</section>
 				</div>
 			</div>
-
+<?php if(defined('IS_LOGGED_IN')==false){ ?>
 			<div class="container">
 				<section class="module">
 						<h3><span>Join</span></h3>
@@ -41,6 +42,7 @@ include('header.php');
 							<a href="signin.php" class="btn">Get Started</a>
 						</div>
 				</section>
+<?php } ?>
 			</div>
 		</div>
 	</main>

@@ -31,12 +31,6 @@
 	    $is_approved = 0;
 	  }
 
-	  //area_id must be int
-	  // if(! is_numeric( $area_id)){
-	  //   $valid = false;
-	  //   $errors[] = 'Please choose a valid area_id';
-	  // }
-
 	  // if valid, add to DB
 	  if($valid){    
 	    $query = "INSERT INTO climbs
@@ -50,15 +44,6 @@
 	    //make sure 1 row was added, show user feedback
 	    if($db->affected_rows == 1){
 	      $message = 'Your climb was saved';
-
-	      //insert rating into ratings table
-	      $climb_id = $db->insert_id;
-	      $query = "INSERT INTO ratings 
-	      				( climb_id, rating, user_id )
-	      			 VALUES 
-	      			 	(  $climb_id, $rating, " . USER_ID . " )";
-	      $result = $db->query($query);
-
 	      if(! $result){
 	      	echo $db->error;
 	      }
@@ -207,15 +192,6 @@
 						<option value="5.14d">5.14d</option>
 					</select>
 
-				<label>Rate this climb: 1 - 5 Stars</label>
-					<select name="rating">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-					</select>
-				<label>
 				  <input type="checkbox" name="is_approved" value="1" <?php checked( $is_approved, 1) ?>>
 				  <p>Make this climb public</p>
 				</label>

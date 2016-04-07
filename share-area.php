@@ -6,8 +6,7 @@
 
 	//parse the form
 	if($_POST['did_post']){
-		//where images will be stored
-
+	$climb_id = $_GET['climb_id'];
 
 	  //extract and sanitize
 	  $title = mysqli_real_escape_string($db, $_POST['title']);
@@ -47,7 +46,6 @@
 	    }
 	    //make sure 1 row was added, show user feedback
 	    if($db->affected_rows == 1){
-	      $message = 'Your area was saved';
 	      if(! $result){
 	      	echo $db->error;
 	      }

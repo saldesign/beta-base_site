@@ -13,7 +13,7 @@ if($_POST['did_post'] ){
 //extract and sanitize
     $name         =  mysqli_real_escape_string($db, $_POST['name']);
     $description  =  mysqli_real_escape_string($db, $_POST['description']);
-    $type         =  mysqli_real_escape_string($db, $_POST['type']);
+    // $type         =  mysqli_real_escape_string($db, $_POST['type']);
     $v_grade      =  mysqli_real_escape_string($db, $_POST['v_grade']);
     $y_grade      =  mysqli_real_escape_string($db, $_POST['y_grade']);
     $is_approved  =  mysqli_real_escape_string($db, $_POST['is_approved']);
@@ -219,18 +219,7 @@ $result_climb = $db->query($query_climb);
                         <option value="5.14b">5.14b</option>
                         <option value="5.14c">5.14c</option>
                         <option value="5.14d">5.14d</option>
-                    </select>
-
-                <label>Rate this climb: 1 - 5 Stars</label>
-                    <select name="rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                <label>
-                 
+                    </select>               
                   <p> <input type="checkbox" name="is_approved" value="1" <?php checked( $is_approved, 1) ?>>Make this climb public</p>
                 </label>
                 <input class="btn" type="submit" value="Save Climb">

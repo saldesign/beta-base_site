@@ -148,6 +148,25 @@ header a.menu-link {
 			color: #FFF;
 			background-color: #1B2C32;
 		}
+/*********   	Header - admin-nav	   *********/
+header[role=banner] {
+  width: 100%;
+  z-index: 99;
+  height: 2.5rem;
+}
+header[role=banner] .utilities {
+  float: right;
+  background: transparent;
+  color: darkslategray;
+  width: auto;
+}
+header[role=banner] .utilities li {
+  display: inline-block;
+}
+header[role=banner] .utilities li a {
+  padding: .5em 1em;
+}
+
 
 /*********   	Main	   *********/
 div.maincontainer{
@@ -238,6 +257,63 @@ main{
 					margin:0 auto 1rem;
 				}
 
+		/*********   	Main - module	   *********/
+		.module h2{
+			font-size: 2rem;
+			margin:0;
+		}
+		.module h3{
+			position: relative;
+			font-size: 1.25rem;
+			font-weight: 400;
+		}
+			.module h3:before{
+				width: 15%;
+			}
+
+			/*********   	Main - tables	   *********/
+			table {
+			  border-collapse: collapse;
+			  width: 96%;
+			  margin: 2%;
+			}
+
+			th {
+			  text-align: left;
+			  font-weight: 400;
+			  font-size: 13px;
+			  text-transform: uppercase;
+			  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+			  padding: 0 10px;
+			  padding-bottom: 14px;
+			}
+
+			tr:not(:first-child):hover {
+			  background: rgba(0, 0, 0, 0.1);
+			}
+
+			td {
+			  line-height: 40px;
+			  font-weight: 300;
+			  padding: 0 10px;
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	/*********  	 Aside - module - secondary	   *********/
 
@@ -245,7 +321,7 @@ main{
 		position: relative;
 		display: inline-block;
 	}
-		.module.secondary h4:before{
+		.bar_underline:before{
 			content: "";
 			position: absolute;
 			bottom: -0.5rem;
@@ -334,6 +410,63 @@ form input[type=submit]{
   -ms-border-radius: .5em;
   border-radius: .5em;
 }*/
+/*
+Star rating CSS From Rogie's excellent pen: 
+@link http://codepen.io/rogie/pen/GIfqc/ 
+*/
+.star-rating {
+  font-size: 0;
+  white-space: nowrap;
+  display: inline-block;
+  width: 250px;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+  background-size: contain;
+}
+.star-rating i {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 20%;
+  z-index: 1;
+  background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZERjg4IiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+  background-size: contain;
+}
+.star-rating input {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  opacity: 0;
+  width: 20%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  position: relative;
+}
+.star-rating input[type=radio]{
+	display: inline-block;
+	width: 3.1rem;
+}
+.star-rating input:hover + i,
+.star-rating input:checked + i {
+  opacity: 1;
+}
+.star-rating i ~ i {
+  width: 40%;
+}
+.star-rating i ~ i ~ i {
+  width: 60%;
+}
+.star-rating i ~ i ~ i ~ i {
+  width: 80%;
+}
+.star-rating i ~ i ~ i ~ i ~ i {
+  width: 100%;
+}
 
 /*********   	Footer	   *********/
 

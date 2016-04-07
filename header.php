@@ -10,7 +10,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,500italic,400italic,700,500|Open+Sans:400,600,700,400italic,600italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="alternate" type="application/rss+xml" href="rss.php">
-
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 </head>
 <body class="cf">
 <header class="cf">
@@ -20,7 +20,7 @@
 		<nav class="main-nav cf" role="navigation">
 			<ul>
 				<li><a href="<?php 
-				if(defined('IS_LOGGED_IN')){
+				if(defined('IS_LOGGED_IN')==true){
 						echo "admin/index.php";
 					}else{
 						echo "signin.php";
@@ -30,7 +30,7 @@
 					echo "currentpage";
 					} 
 					?>"><?php 
-					if(defined('IS_LOGGED_IN')){
+					if(defined('IS_LOGGED_IN')==true){
 						echo "My Account";
 					}else{
 						echo "Sign In";
